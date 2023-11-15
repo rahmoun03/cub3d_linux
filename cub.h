@@ -6,15 +6,15 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/08/01 13:35:48 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:05:35 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "/nfs/homes/arahmoun/Downloads/minilibx-linux/mlx.h"
-# include "/nfs/homes/arahmoun/Downloads/minilibx-linux/mlx_int.h"
+# include "/home/arahmoun/Desktop/minilibx-linux/mlx.h"
+# include "/home/arahmoun/Desktop/minilibx-linux/mlx_int.h"
 # include "./get_next_line/get_next_line.h"
 
 # define RED "\033[7m\033[31m"
