@@ -6,11 +6,28 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:31:39 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/15 23:45:16 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 00:07:01 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void double_nl(t_map *map)
+{
+	int i;
+
+	i = map->i;
+	while (map->map[i])
+	{
+		if ( map->map[i] == '\n' && map->map[map->i + 1]
+			&& map->map[i + 1] == '\n')
+		{
+			printf("Error : double_nl()\n");
+			exit(1);
+		}
+		i++;
+	}
+}
 
 void    read_file(t_map *map, int fd)
 {
@@ -27,6 +44,7 @@ void    read_file(t_map *map, int fd)
     }
 	check_element(map);
 	check_map(map);
+	double_nl(map);
 	for (int k = map->i; map->map[k]; k++)
 	{
 		printf("%c", map->map[k]);
@@ -174,4 +192,6 @@ void	check_element(t_map *map)
 		}
 		map->i++;
 	}
+	while (map->map[map->i] && map->map[map->i] == '\n')
+		map->i++;
 }
