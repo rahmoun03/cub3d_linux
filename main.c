@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/15 17:55:49 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:56:14 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 		printf("\n%s\n", ptr->we);
 		printf("\n%s\n", ptr->ea);
 		printf("\n%s\n", ptr->f);
-		printf("\n%s\n\n\n\n\n", ptr->c);
+		printf("\n%s\n", ptr->c);
 	}
 }
 
