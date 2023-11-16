@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/15 22:56:14 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 02:25:37 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ int	check_path(char *str)
 	return (0);
 }
 
+void init_t_map(t_map *ptr)
+{
+	ptr->no = NULL;
+	ptr->so = NULL;
+	ptr->we = NULL;
+	ptr->ea = NULL;
+	ptr->map = NULL;
+	ptr->maps = NULL;
+	ptr->dst = NULL;
+	ptr->c = NULL;
+	ptr->f = NULL;
+	ptr->ceiling.numbers = NULL;
+	ptr->floor.numbers = NULL;
+}
+
 
 int	main(int ac, char **av)
 {
@@ -69,5 +84,3 @@ int	main(int ac, char **av)
 		printf("\n%s\n", ptr->c);
 	}
 }
-
-

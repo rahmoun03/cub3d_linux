@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/15 23:28:29 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 03:15:08 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@
 
 // data structer
 
+typedef struct s_c
+{
+	char **numbers;
+	int r;
+	int g;
+	int b;
+}t_c;
+
+typedef struct s_f
+{
+	char **numbers;
+	int r;
+	int g;
+	int b;
+}t_f;
+
 typedef struct s_map
 {
 	int		j;
@@ -36,6 +52,8 @@ typedef struct s_map
 	char	*map;
 	char	**maps;
 	char	*dst;
+	t_c		ceiling;
+	t_f		floor;
 }			t_map;
 
 typedef struct s_game
@@ -61,8 +79,13 @@ typedef struct s_game
 
 void    read_file(t_map *map, int fd);
 char	**ft_split(char const *s, char c);
+int		ft_atoi(char *str);
+int		ft_is_digit(int c);
 void	check_element(t_map *map);
 void	check_map(t_map *map);
+void	check_c_f(t_map *map);
+void 	map_closed(t_map *map);
+
 
 
 

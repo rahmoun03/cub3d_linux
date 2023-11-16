@@ -6,7 +6,7 @@
 #    By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 12:53:19 by arahmoun          #+#    #+#              #
-#    Updated: 2023/11/15 01:23:27 by arahmoun         ###   ########.fr        #
+#    Updated: 2023/11/16 01:00:48 by arahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub
 
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c 
 
-SRCS = ${GNL} main.c utils.c readfile.c ft_split.c 
+SRCS = ${GNL} main.c utils.c readfile.c ft_split.c ft_atoi.c
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 

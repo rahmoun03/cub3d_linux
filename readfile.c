@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:31:39 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 00:07:01 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 03:28:34 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void double_nl(t_map *map)
 void    read_file(t_map *map, int fd)
 {
 	int i = 0;
-    map->map = NULL;
     map->dst = get_next_line(fd);
     while (map->dst)
     {
@@ -43,12 +42,98 @@ void    read_file(t_map *map, int fd)
         map->dst = get_next_line(fd);
     }
 	check_element(map);
+	check_c_f(map);
 	check_map(map);
+	map_closed(map);
 	double_nl(map);
-	for (int k = map->i; map->map[k]; k++)
+}
+
+void 	map_closed(t_map *map)
+{
+	map->maps = ft_split((map->map) + map->i, '\n');
+	map->a = 0;
+	map->j = 0;
+	while (map->maps[map->a][map->j])
 	{
-		printf("%c", map->map[k]);
+		if(map->maps[map->a][map->j] != '1' && map->maps[map->a][map->j] != ' ')
+			exit(66);
+		map->j++;
 	}
+	for (int k = 0; map->maps[k]; k++)
+	{
+		printf("%s\n", map->maps[k]);
+	}
+}
+
+void	c_f_first(char **numbers)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (numbers[i])
+	{
+		j = 0;
+		while (numbers[i][j])
+		{
+			if (ft_is_digit(numbers[i][j]))
+				j++;
+			else
+			{
+				printf("Error : c_f_first(%c)\n", numbers[i][j]);
+				exit(0);
+			}
+		}
+		i++;
+	}
+	if ( i != 3 || numbers[3] != NULL)
+	{
+		printf("Error : number c_f_first()\n");
+		exit(0);
+	}
+}
+
+void	c_f_end(t_map *map)
+{
+	if(map->ceiling.r > 255 || map->ceiling.g > 255 || map->ceiling.b > 255)
+	{
+		printf("Error : number c_f_end()\n");
+		exit(0);
+	}
+	if(map->ceiling.r < 0 || map->ceiling.g < 0 || map->ceiling.b < 0)
+	{
+		printf("Error : number c_f_end()\n");
+		exit(0);
+	}
+	if(map->floor.r > 255 || map->floor.g > 255 || map->floor.b > 255)
+	{
+		printf("Error : number c_f_end()\n");
+		exit(0);
+	}
+	if(map->floor.r < 0 || map->floor.g < 0 || map->floor.b < 0)
+	{
+		printf("Error : number c_f_end()\n");
+		exit(0);
+	}
+}
+
+void	check_c_f(t_map *map)
+{
+	map->ceiling.numbers = ft_split(map->c, ',');
+	map->floor.numbers = ft_split(map->f, ',');
+
+	// ceiling
+	c_f_first(map->ceiling.numbers);
+	map->ceiling.r = ft_atoi(map->ceiling.numbers[0]);
+	map->ceiling.g = ft_atoi(map->ceiling.numbers[1]);
+	map->ceiling.b = ft_atoi(map->ceiling.numbers[2]);
+	// floor
+	c_f_first(map->floor.numbers);
+ 	map->floor.r = ft_atoi(map->floor.numbers[0]);
+	map->floor.g = ft_atoi(map->floor.numbers[1]);
+	map->floor.b = ft_atoi(map->floor.numbers[2]);
+
+	c_f_end(map);
 }
 
 void	check_map(t_map *map)
