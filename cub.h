@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 03:15:08 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:47:53 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 # define YOLLOW "\033[7m\033[33m"
 
 // data structer
+
+typedef struct s_ft
+{
+	int i;
+	int j;
+	int colum;
+	int spaces;
+	char **maps;
+} t_ft;
 
 typedef struct s_c
 {
@@ -43,6 +52,7 @@ typedef struct s_map
 	int		j;
 	int		a;
 	int		i;
+	int		spaces;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -52,6 +62,7 @@ typedef struct s_map
 	char	*map;
 	char	**maps;
 	char	*dst;
+	char	player;
 	t_c		ceiling;
 	t_f		floor;
 }			t_map;
@@ -85,6 +96,7 @@ void	check_element(t_map *map);
 void	check_map(t_map *map);
 void	check_c_f(t_map *map);
 void 	map_closed(t_map *map);
+void	flood_fill(t_ft *tmp, int i, int j);
 
 
 

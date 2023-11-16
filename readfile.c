@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:31:39 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 03:28:34 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:54:07 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,26 @@ void double_nl(t_map *map)
 		{
 			printf("Error : double_nl()\n");
 			exit(1);
+		}
+		i++;
+	}
+}
+
+void wc_space(t_map *map, char **str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	map->spaces = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if(str[i][j] == ' ')
+				map->spaces++;
+			j++;
 		}
 		i++;
 	}
@@ -48,21 +68,95 @@ void    read_file(t_map *map, int fd)
 	double_nl(map);
 }
 
+void	ft_free_tmp(char **tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp[i])
+		free(tmp[i++]);
+}
+
+int	item_chr(char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0' && c != s[i])
+		i++;
+	if (c == s[i])
+		return (i);
+	return (-1);
+}
+
+int	ft_wc_l(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	ft_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 void 	map_closed(t_map *map)
 {
-	map->maps = ft_split((map->map) + map->i, '\n');
-	map->a = 0;
-	map->j = 0;
-	while (map->maps[map->a][map->j])
+	t_ft	*tmp;
+
+	tmp = (t_ft *)malloc(sizeof(t_ft));
+	tmp->i = 0;
+	tmp->j = -1;
+	tmp->maps = ft_split((map->map) + map->i, '\n');
+	tmp->colum = ft_wc_l(tmp->maps);
+	wc_space(map, tmp->maps);
+	tmp->spaces = map->spaces;
+	while (tmp->maps[tmp->i] && tmp->j == -1)
+		tmp->j = item_chr(tmp->maps[tmp->i++], map->player);
+	tmp->i--;
+	flood_fill(tmp, tmp->i, tmp->j);
+	wc_space(map, tmp->maps);
+	if(tmp->spaces != map->spaces)
 	{
-		if(map->maps[map->a][map->j] != '1' && map->maps[map->a][map->j] != ' ')
-			exit(66);
-		map->j++;
+		printf("Error map_closed()\n");
+		exit(0);
 	}
-	for (int k = 0; map->maps[k]; k++)
+
+
+	for(int i = 0; tmp->maps[i]; i++)
 	{
-		printf("%s\n", map->maps[k]);
+		printf("%s\n", tmp->maps[i]);
 	}
+	// check = ft_search(tmp->tmp);
+	ft_free_tmp(tmp->maps);
+	free(tmp->maps);
+	free(tmp);
+}
+
+void	flood_fill(t_ft *tmp, int i, int j)
+{
+	if (i < 0 || j < 0 || i > tmp->colum
+		|| tmp->maps[i][j] == '*')
+		return ;
+
+	tmp->maps[i][j] = '*';
+	if (tmp->maps[i][j + 1] && tmp->maps[i][j + 1] != '1')
+		flood_fill(tmp, i, j + 1);
+	if (tmp->maps[i + 1][j] && tmp->maps[i + 1][j] != '1')
+		flood_fill(tmp, i + 1, j);
+	if (i - 1 >= 0 && tmp->maps[i - 1][j] && tmp->maps[i - 1][j] != '1')
+		flood_fill(tmp, i - 1, j);
+	if (j - 1 >= 0 && tmp->maps[i][j - 1] && tmp->maps[i][j - 1] != '1')
+		flood_fill(tmp, i, j - 1);
 }
 
 void	c_f_first(char **numbers)
@@ -153,7 +247,10 @@ void	check_map(t_map *map)
 
 			if(map->map[i] == 'W' || map->map[i] == 'S'
 				|| map->map[i] == 'E' || map->map[i] == 'N')
+			{
+				map->player = map->map[i];
 				player++;
+			}
 			i++;
 		}
 		else
