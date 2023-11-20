@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:31:39 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 19:54:07 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/19 11:32:37 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,13 +130,10 @@ void 	map_closed(t_map *map)
 		printf("Error map_closed()\n");
 		exit(0);
 	}
-
-
+	
 	for(int i = 0; tmp->maps[i]; i++)
-	{
 		printf("%s\n", tmp->maps[i]);
-	}
-	// check = ft_search(tmp->tmp);
+		
 	ft_free_tmp(tmp->maps);
 	free(tmp->maps);
 	free(tmp);

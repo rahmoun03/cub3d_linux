@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 19:47:53 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/19 11:14:37 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB_H
 
 # include "./get_next_line/get_next_line.h"
+# include "mlx.h"
 
 # define RED "\033[7m\033[31m"
 # define DEFFAULT "\033[0m"
@@ -69,7 +70,7 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	int		start;
+	int		size;
 	int		xlpayer;
 	int		ylpayer;
 	int		x;
@@ -99,6 +100,8 @@ void 	map_closed(t_map *map);
 void	flood_fill(t_ft *tmp, int i, int j);
 
 
+
+void    put_game(t_game *game, t_map *map);
 
 
 # endif
