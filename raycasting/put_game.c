@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/20 15:45:41 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:19:35 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,30 @@ void	put_player(t_game *game)
 	}
 }
 
+
+
+void draw_grid(t_game *game, t_map *map)
+{
+	int x;
+	int y;
+	int j = -1;
+ 
+	y = 0;
+	while (y < ft_wc_l(map->maps) * 32)
+	{
+		x = 0;
+		if (y % 32 == 0)
+			j++;
+		while (x < ft_len(map->maps[j]) * 32)
+		{
+			if(x % 32 == 0  || y % 32 == 0)
+				mlx_pixel_put(game->mlx, game->win, x, y, 5308240);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	mlx_put_squar(t_game *game, int color)
 {
 	// printf("[  width = %d  hight = %d  color = %d ] \n", game->width, game->hight, color);
@@ -93,7 +117,7 @@ void    put_game(t_game *game, t_map *map)
 	game->y = 0;
 	game->hight = 0;
 	int h;
-	game->size = 32; 
+	game->size = 32;
 	while(map->maps[game->y])
 	{
 		game->x = 0;
@@ -118,7 +142,7 @@ void    put_game(t_game *game, t_map *map)
 		game->hight += 32;
 		game->y++;
 	}
-
+	draw_grid(game, map);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_hook(game->win, 17, 1L << 0, ft_exit, game);
 	mlx_loop(game->mlx);

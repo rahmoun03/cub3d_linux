@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/19 11:14:37 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:39:34 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	check_map(t_map *map);
 void	check_c_f(t_map *map);
 void 	map_closed(t_map *map);
 void	flood_fill(t_ft *tmp, int i, int j);
+int	ft_len(char *str);
+int	ft_wc_l(char **str);
 
 
 
