@@ -6,7 +6,7 @@
 #    By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 12:53:19 by arahmoun          #+#    #+#              #
-#    Updated: 2023/11/19 10:34:36 by arahmoun         ###   ########.fr        #
+#    Updated: 2023/11/20 15:45:16 by arahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME = cub
 
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c 
 
-SRCS = ${GNL} main.c utils.c readfile.c ft_split.c ft_atoi.c put_game.c
+PSRC = parser/utils.c parser/readfile.c parser/ft_split.c parser/ft_atoi.c
+
+RSRC = raycasting/put_game.c
+
+SRCS = ${GNL} ${PSRC} ${RSRC} main.c 
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 

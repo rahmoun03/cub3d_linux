@@ -6,11 +6,11 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:31:14 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/08/01 10:31:35 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:42:16 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 
 static int	ft_count_words(char *s, char c)
 {

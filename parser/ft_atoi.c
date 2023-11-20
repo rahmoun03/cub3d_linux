@@ -6,11 +6,11 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 01:00:07 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 01:02:27 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:42:22 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 
 static void	ft_sing(char c, int *sing, unsigned long *i)
 {

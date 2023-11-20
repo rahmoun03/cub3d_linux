@@ -6,11 +6,11 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/19 14:45:02 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:45:41 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 int	ft_exit(int key, t_game *game)
 {
 	(void)game;

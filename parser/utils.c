@@ -6,11 +6,11 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:26 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/16 01:38:32 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:42:02 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 
 int ft_is_digit(int c)
 {
