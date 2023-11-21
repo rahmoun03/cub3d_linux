@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/20 16:39:34 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:49:38 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./get_next_line/get_next_line.h"
 # include "mlx.h"
+# include <math.h>
 
 # define RED "\033[7m\033[31m"
 # define DEFFAULT "\033[0m"
@@ -71,10 +72,13 @@ typedef struct s_map
 typedef struct s_game
 {
 	int		size;
-	int		xlpayer;
-	int		ylpayer;
+	int		xplayer;
+	int		yplayer;
 	int		x;
 	int		y;
+	float	rotatangle;
+	int		rotatspeed;
+	int		movespeed;
 	void	*img;
 	void	*win;
 	void	*mlx;
@@ -104,6 +108,19 @@ int	ft_wc_l(char **str);
 
 
 void    put_game(t_game *game, t_map *map);
+void    shut_rays(t_game *game, t_map *map);
+void    direction(t_game *game, t_map *map);
+void	put_player(t_game *game);
+void	mlx_put_squar(t_game *game, int color);
+void    ft_up(t_game *game);
+void	draw_grid(t_game *game, t_map *map);
+
+// moves
+void    ft_up(t_game *game);
+void    ft_down(t_game *game);
+void    ft_right(t_game *game);
+void    ft_lift(t_game *game);
+void 	put_ground(t_game *game, t_map *map);
 
 
 # endif

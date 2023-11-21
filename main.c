@@ -6,12 +6,11 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/19 11:34:01 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 03:42:46 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
 
 
 int	check_path(char *str)
@@ -22,8 +21,8 @@ int	check_path(char *str)
 
 	j = 0;
 	cub = ft_strdup(".cub");
-	i = ft_strlen(str) - 4;
-	while (str[i])
+	i = ft_len(str) - 4;
+	while (cub[j] && str[i])
 	{
 		if (str[i] != cub[j])
 		{
@@ -74,6 +73,7 @@ int	main(int ac, char **av)
 	}
     else
 	{
+		init_t_map(ptr);
         printf("%svalid \n%s" , GREEN, DEFFAULT);
 		read_file(ptr, fd);
 		printf("\n\n\n\n\n%s\n", ptr->no);

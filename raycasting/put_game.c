@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/20 17:19:35 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:52:15 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,21 @@ int	ft_exit(int key, t_game *game)
 
 int	key_hook(int key, t_game *game)
 {
-
-	(void)game;
 	printf("%d\n", key);
-	// if (key == 126 || key == 13)
-	// 	ft_up(game);
-	// if (key == 125 || key == 1)
-	// 	ft_down(game);
-	// if (key == 124 || key == 2)
-	// 	ft_right(game);
-	// if (key == 123 || key == 0)
-	// 	ft_lift(game);
-	// if (key == 53)
-	// {
-	// 	ft_printf("%s ______ YOU EXIT THE GAME _____ %s", "\033[7m\033[33m",
-	// 		"\033[0m");
-	// 	exit(0);
-	// }
+	if (key == 126 || key == 13)
+		ft_up(game);
+	if (key == 125 || key == 1)
+		ft_down(game);
+	if (key == 124 || key == 2)
+		ft_right(game);
+	if (key == 123 || key == 0)
+		ft_lift(game);
+	if (key == 53)
+	{
+		printf("%s ______ YOU EXIT THE GAME _____ %s", "\033[7m\033[33m",
+			"\033[0m");
+		exit(0);
+	}
 	// if (key == 36 && game->start <= 1)
 	// {
 	// 	if (game->start == 1)
@@ -50,21 +48,19 @@ int	key_hook(int key, t_game *game)
 
 void	put_player(t_game *game)
 {
-	int i;
-	int j;
+    printf("put player in\nx : %d\ny : %d\n", game->xplayer, game->yplayer);
 
-	printf("put _ player \n");
-	i = 0;
-	while(i < 3)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			mlx_pixel_put(game->mlx, game->win, game->width + j, game->hight + i, 16711680);
-			j++;
-		}
-		i++;
-	}
+	mlx_pixel_put(game->mlx, game->win, game->xplayer - 1, game->yplayer - 1, 16711680);
+	mlx_pixel_put(game->mlx, game->win, game->xplayer , game->yplayer - 1, 16711680);
+	mlx_pixel_put(game->mlx, game->win, game->xplayer + 1, game->yplayer - 1, 16711680);
+
+	mlx_pixel_put(game->mlx, game->win, game->xplayer - 1, game->yplayer, 16711680);
+	mlx_pixel_put(game->mlx, game->win, game->xplayer , game->yplayer, 16711680);
+	mlx_pixel_put(game->mlx, game->win, game->xplayer + 1, game->yplayer, 16711680);
+
+	mlx_pixel_put(game->mlx, game->win, game->xplayer - 1, game->yplayer + 1, 16711680);
+	mlx_pixel_put(game->mlx, game->win, game->xplayer , game->yplayer + 1, 16711680);
+	mlx_pixel_put(game->mlx, game->win, game->xplayer + 1, game->yplayer + 1, 16711680);
 }
 
 
@@ -74,7 +70,7 @@ void draw_grid(t_game *game, t_map *map)
 	int x;
 	int y;
 	int j = -1;
- 
+
 	y = 0;
 	while (y < ft_wc_l(map->maps) * 32)
 	{
@@ -106,18 +102,13 @@ void	mlx_put_squar(t_game *game, int color)
 		game->hight++;
 	}
 }
-void    put_game(t_game *game, t_map *map)
-{
-	(void)map;
-	
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 1600, 1080, (char *)" cub ");
 
-	// put pixel
+void put_ground(t_game *game, t_map *map)
+{
+	int h;
+
 	game->y = 0;
 	game->hight = 0;
-	int h;
-	game->size = 32;
 	while(map->maps[game->y])
 	{
 		game->x = 0;
@@ -125,17 +116,54 @@ void    put_game(t_game *game, t_map *map)
 		h = game->hight;
 		while(map->maps[game->y][game->x])
 		{
-			if(map->maps[game->y][game->x] == '0')
+			if(map->maps[game->y][game->x] == '0' || map->maps[game->y][game->x] == map->player)
 				mlx_put_squar(game, 64682174);
-			else if(map->maps[game->y][game->x] == '1')
+			else
+			{
+				game->width +=32;
+				game->hight +=32;
+			}
+			game->x++;
+			game->hight = h;
+		}
+		game->hight += 32;
+		game->y++;
+	}
+}
+
+void    put_game(t_game *game, t_map *map)
+{	
+	int h;
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, 1600, 1080, (char *)" cub ");
+
+	// put pixel
+	game->t_map = map;
+	game->size = 32;
+	put_ground(game, map);
+	game->hight = 0;
+	game->y = 0;
+	while(map->maps[game->y])
+	{
+		game->x = 0;
+		game->width = 0;
+		h = game->hight;
+		while(map->maps[game->y][game->x])
+		{
+			if(map->maps[game->y][game->x] == '1')
 				mlx_put_squar(game, 255);
 			else if(map->maps[game->y][game->x] == map->player)
 			{
 				mlx_put_squar(game, 64682174);
+				game->xplayer = (game->width - (game->size/ 2));
+				game->yplayer = (game->hight - (game->size/ 2));
 				put_player(game);
 			}
 			else
-				mlx_put_squar(game, 0);
+			{
+				game->width +=32;
+				game->hight +=32;
+			}
 			game->x++;
 			game->hight = h;
 		}
@@ -143,6 +171,7 @@ void    put_game(t_game *game, t_map *map)
 		game->y++;
 	}
 	draw_grid(game, map);
+	shut_rays(game, map);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_hook(game->win, 17, 1L << 0, ft_exit, game);
 	mlx_loop(game->mlx);

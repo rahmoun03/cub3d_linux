@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:08:17 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/08/01 09:18:28 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 05:24:19 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
-
+	
 	i = 0;
-	while (str[i])
+	if (!str)
+        exit(0);
+	while (str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -72,14 +74,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i[3];
 	char	*re;
 
-	if (!s1)
+	if (!s1 && s2)
 		return (s2);
+	if (!s2)
+		return (s1);
 	i[1] = 0;
 	i[0] = ft_strlen(s1) + ft_strlen(s2);
 	re = (char *)malloc(i[0] + 1);
 	if (!re)
 		return (NULL);
-	while (s1[i[1]] && i[1] <= i[0])
+	while (i[1] <= i[0] && s1[i[1]])
 	{
 		re[i[1]] = s1[i[1]];
 		i[1]++;

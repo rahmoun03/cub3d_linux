@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:31:39 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/20 15:42:06 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 03:43:36 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    read_file(t_map *map, int fd)
 {
 	int i = 0;
     map->dst = get_next_line(fd);
-    while (map->dst)
+    while (map->dst != NULL)
     {
         map->map = ft_strjoin(map->map, map->dst);
 		if (i > 0)

@@ -6,7 +6,7 @@
 #    By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 12:53:19 by arahmoun          #+#    #+#              #
-#    Updated: 2023/11/20 15:45:16 by arahmoun         ###   ########.fr        #
+#    Updated: 2023/11/21 09:32:30 by arahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 PSRC = parser/utils.c parser/readfile.c parser/ft_split.c parser/ft_atoi.c
 
-RSRC = raycasting/put_game.c
+RSRC = raycasting/put_game.c raycasting/raycast.c raycasting/move_player.c
 
 SRCS = ${GNL} ${PSRC} ${RSRC} main.c 
 
@@ -24,7 +24,7 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 MLX_LINUX = -lmlx -lXext -lX11 -lm -lmcheck
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 CC = cc ${FLAGS}
 
