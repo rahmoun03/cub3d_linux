@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 13:52:15 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:34:52 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,29 @@ int	ft_exit(int key, t_game *game)
 int	key_hook(int key, t_game *game)
 {
 	printf("%d\n", key);
-	if (key == 126 || key == 13)
+// moves
+	if (key == 13)
 		ft_up(game);
-	if (key == 125 || key == 1)
+	if (key == 1)
 		ft_down(game);
-	if (key == 124 || key == 2)
+	if (key == 2)
 		ft_right(game);
-	if (key == 123 || key == 0)
+	if (key == 0)
 		ft_lift(game);
+
+// rotation
+	if (key == 124)
+		ft_rotat_right(game);
+	if (key == 123)
+		ft_rotat_lift(game);
+
+// exit
 	if (key == 53)
 	{
 		printf("%s ______ YOU EXIT THE GAME _____ %s", "\033[7m\033[33m",
 			"\033[0m");
 		exit(0);
 	}
-	// if (key == 36 && game->start <= 1)
-	// {
-	// 	if (game->start == 1)
-	// 		exit(0);
-	// 	game->start = 3;
-	// 	ground(game);
-	// 	draw_map(game);
-	// }
 	return (key);
 }
 
@@ -171,6 +172,7 @@ void    put_game(t_game *game, t_map *map)
 		game->y++;
 	}
 	draw_grid(game, map);
+	game->rotatangle = M_PI / 2;
 	shut_rays(game, map);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_hook(game->win, 17, 1L << 0, ft_exit, game);

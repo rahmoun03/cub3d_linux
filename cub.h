@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 13:49:38 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:32:43 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void    ft_down(t_game *game);
 void    ft_right(t_game *game);
 void    ft_lift(t_game *game);
 void 	put_ground(t_game *game, t_map *map);
+void    ft_rotat_right(t_game *game);
+void    ft_rotat_lift(t_game *game);
 
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 05:23:47 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 13:39:30 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:24:24 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,16 @@ void    lift_rays(t_game *game, t_map *map, int b)
 
 void    shut_rays(t_game *game, t_map *map)
 {
-    // (void)map;
-    // int x = game->xplayer;
-    // int y = game->yplayer;
-    // int pix = 0;
+    (void)map;
+    int x = game->xplayer;
+    int y = game->yplayer;
+    int pix = 0;
 
-    // game->rotatangle = M_PI / 2;
-    // while(pix < 32)
-    // {
-    //     mlx_pixel_put(game->mlx, game->win, x + cos(game->rotatangle) * pix, y + sin(game->rotatangle) * pix, 16711680);
-    //     pix++;
-    // }
+    while(pix < 120 && map->maps[(int)(y + sin(game->rotatangle) * pix) / game->size][(int)(x + cos(game->rotatangle) * pix) / game->size] != '1')
+    {
+        mlx_pixel_put(game->mlx, game->win, x + cos(game->rotatangle) * pix, y + sin(game->rotatangle) * pix, 16711680);
+        pix++;
+    }
 
 
 
@@ -99,32 +98,32 @@ void    shut_rays(t_game *game, t_map *map)
 
 
     
-    int b;
-    int p;
+    // int b;
+    // int p;
 
-    b = 1;
-    p = 0;
-    direction(game, map);
-    game->chight = game->yplayer;
-    game->cwidth = game->xplayer;
-    if (map->player == 'N')
-    {
-        while(b < game->size)
-        {
-            game->chight = game->yplayer;
-            game->cwidth = game->xplayer;
-            lift_rays(game, map, b);
-            b++;
-        }
-        b = 1;
-        while(b < game->size)
-        {
-            game->chight = game->yplayer;
-            game->cwidth = game->xplayer;
-            right_rays(game, map, b);
-            b++;            
-        }
-    }
+    // b = 1;
+    // p = 0;
+    // direction(game, map);
+    // game->chight = game->yplayer;
+    // game->cwidth = game->xplayer;
+    // if (map->player == 'N')
+    // {
+    //     while(b < game->size)
+    //     {
+    //         game->chight = game->yplayer;
+    //         game->cwidth = game->xplayer;
+    //         lift_rays(game, map, b);
+    //         b++;
+    //     }
+    //     b = 1;
+    //     while(b < game->size)
+    //     {
+    //         game->chight = game->yplayer;
+    //         game->cwidth = game->xplayer;
+    //         right_rays(game, map, b);
+    //         b++;            
+    //     }
+    // }
 
 
 
