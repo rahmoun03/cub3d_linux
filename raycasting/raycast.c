@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 05:23:47 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 14:24:24 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:14:44 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void    shut_rays(t_game *game, t_map *map)
     int y = game->yplayer;
     int pix = 0;
 
-    while(pix < 120 && map->maps[(int)(y + sin(game->rotatangle) * pix) / game->size][(int)(x + cos(game->rotatangle) * pix) / game->size] != '1')
+    while(map->maps[(int)(y + sin(game->rotatangle) * pix) / game->size][(int)(x + cos(game->rotatangle) * pix) / game->size] != '1')
     {
         mlx_pixel_put(game->mlx, game->win, x + cos(game->rotatangle) * pix, y + sin(game->rotatangle) * pix, 16711680);
         pix++;

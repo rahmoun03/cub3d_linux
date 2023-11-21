@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 14:34:52 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:29:34 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	key_hook(int key, t_game *game)
 		ft_up(game);
 	if (key == 1)
 		ft_down(game);
-	if (key == 2)
-		ft_right(game);
-	if (key == 0)
-		ft_lift(game);
+	// if (key == 2)
+	// 	ft_right(game);
+	// if (key == 0)
+	// 	ft_lift(game);
 
 // rotation
 	if (key == 124)
@@ -63,8 +63,6 @@ void	put_player(t_game *game)
 	mlx_pixel_put(game->mlx, game->win, game->xplayer , game->yplayer + 1, 16711680);
 	mlx_pixel_put(game->mlx, game->win, game->xplayer + 1, game->yplayer + 1, 16711680);
 }
-
-
 
 void draw_grid(t_game *game, t_map *map)
 {
