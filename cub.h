@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 14:32:43 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:03:04 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,34 @@
 # define GREEN "\033[7m\033[32m"
 # define YOLLOW "\033[7m\033[33m"
 
-// data structer
 
+# define WIDTH 1730
+# define HEIGHT 1130
+
+// data structer
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+// int	main(void)
+// {
+// 	void	*mlx;
+// 	void	*mlx_win;
+// 	t_data	img;
+
+// 	mlx = mlx_init();
+// 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+// 	img.img = mlx_new_image(mlx, 1920, 1080);
+// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+// 								&img.endian);
+// 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+// 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+// 	mlx_loop(mlx);
+// }
 typedef struct s_ft
 {
 	int i;
@@ -77,7 +103,7 @@ typedef struct s_game
 	int		x;
 	int		y;
 	float	rotatangle;
-	int		rotatspeed;
+	float	rotatspeed;
 	int		movespeed;
 	void	*img;
 	void	*win;
@@ -124,5 +150,5 @@ void 	put_ground(t_game *game, t_map *map);
 void    ft_rotat_right(t_game *game);
 void    ft_rotat_lift(t_game *game);
 
-
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 # endif

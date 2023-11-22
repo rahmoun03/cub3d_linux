@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 05:23:47 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 15:14:44 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:44:38 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,27 @@ void    lift_rays(t_game *game, t_map *map, int b)
 void    shut_rays(t_game *game, t_map *map)
 {
     (void)map;
-    int x = game->xplayer;
-    int y = game->yplayer;
-    int pix = 0;
+    int x ;
+    int y ;
+    int pix ;
+    int i = 0;
 
-    while(map->maps[(int)(y + sin(game->rotatangle) * pix) / game->size][(int)(x + cos(game->rotatangle) * pix) / game->size] != '1')
+    while (i < 360)
     {
-        mlx_pixel_put(game->mlx, game->win, x + cos(game->rotatangle) * pix, y + sin(game->rotatangle) * pix, 16711680);
-        pix++;
+        y = game->yplayer;
+        x = game->xplayer;
+        pix = 0;
+        while(map->maps[(int)(y + sin(game->rotatangle + i * game->rotatspeed) * pix) / game->size][(int)(x + cos(game->rotatangle + i * game->rotatspeed) * pix) / game->size] != '1')
+        {
+            mlx_pixel_put(game->mlx, game->win, x + cos(game->rotatangle + i * game->rotatspeed) * pix, y + sin(game->rotatangle + i * game->rotatspeed) * pix, 16711680);
+            pix++;
+        }
+        // game->rotatangle = M_PI / 2;
+        //  game->rotatangle += 1 * game->rotatspeed;
+        i++;
     }
+    
+    
 
 
 

@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 15:29:34 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:02:47 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_exit(int key, t_game *game)
 int	key_hook(int key, t_game *game)
 {
 	printf("%d\n", key);
+	// (void)game;
 // moves
 	if (key == 13)
 		ft_up(game);
@@ -45,6 +46,14 @@ int	key_hook(int key, t_game *game)
 		exit(0);
 	}
 	return (key);
+}
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
 
 void	put_player(t_game *game)
@@ -130,15 +139,48 @@ void put_ground(t_game *game, t_map *map)
 	}
 }
 
+void 	init_rotation(t_game *game)
+{
+	game->rotatangle = M_PI / 2;
+	game->rotatspeed = 4 * (M_PI / 360);
+}
+
+void	put_image(t_game *game, char *filename)
+{
+	game->xpm = mlx_xpm_file_to_image(game->mlx, filename, &game->width,
+			&game->hight);
+	mlx_put_image_to_window(game->mlx, game->win, game->xpm, 0, 0);
+	mlx_destroy_image(game->mlx, game->xpm);
+}
+
+
+
+void	draw_start(t_game *game)
+{
+	sleep(5);
+	put_image(game, "texture/ps1.xpm");
+	sleep(1);
+	put_image(game, "texture/ps2.xpm");
+	sleep(1);
+	put_image(game, "texture/ps3.xpm");
+	sleep(1);
+	put_image(game, "texture/ps4.xpm");
+	sleep(1);
+	put_image(game, "texture/ps5.xpm");
+	sleep(5);
+}
+
 void    put_game(t_game *game, t_map *map)
 {	
+	// (void)map;
 	int h;
+	
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 1600, 1080, (char *)" cub ");
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, (char *)" cub ");
 
-	// put pixel
 	game->t_map = map;
 	game->size = 32;
+	// draw_start(game);
 	put_ground(game, map);
 	game->hight = 0;
 	game->y = 0;
@@ -170,9 +212,10 @@ void    put_game(t_game *game, t_map *map)
 		game->y++;
 	}
 	draw_grid(game, map);
-	game->rotatangle = M_PI / 2;
+	init_rotation(game);
 	shut_rays(game, map);
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
 	mlx_hook(game->win, 17, 1L << 0, ft_exit, game);
 	mlx_loop(game->mlx);
+	
 }
