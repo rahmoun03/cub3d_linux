@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 03:42:46 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:15:52 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int ac, char **av)
 
 	ptr = (t_map *)malloc(sizeof(t_map));
 	game = (t_game *)malloc(sizeof(t_game));
+	game->t_map = ptr;
 	fd = open(av[1], O_RDWR);
 	if (ac != 2 || fd == -1 || !check_path(av[1]))
 	{
@@ -84,6 +85,6 @@ int	main(int ac, char **av)
 		printf("\n%s\n", ptr->c);
 		ptr->maps = ft_split((ptr->map) + ptr->i, '\n');
 
-		put_game(game, ptr);
+		start_mlx(game);
 	}
 }

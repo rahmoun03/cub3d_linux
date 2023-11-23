@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/22 15:22:04 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:53:34 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,17 @@
 # define YOLLOW "\033[7m\033[33m"
 
 
+# define ESC 53   // key escape
+# define ENTER 36 // key "enter"
+# define FOLLOW 3 // key "f"
+# define COLOR 8  // key "c"
+# define UP 13   // key "w"
+# define DOWN 1 // key "s"
+# define PENGUIN 35 // key "p"
+# define RAND_COLOR 15 // key "r"
+
 # define WIDTH 1730
+# define SIZE 40
 # define HEIGHT 1130
 
 // data structer
@@ -84,8 +94,8 @@ typedef struct s_game
 	int		yplayer;
 	int		x;
 	int		y;
-	float	rotatangle;
-	float	rotatspeed;
+	double	rotatangle;
+	double	rotatspeed;
 	int		movespeed;
 	void	*win;
 	void	*mlx;
@@ -119,6 +129,7 @@ int	ft_wc_l(char **str);
 
 
 
+void	start_mlx(t_game *game);
 void    put_game(t_game *game, t_map *map);
 void    shut_rays(t_game *game, t_map *map);
 void    direction(t_game *game, t_map *map);
