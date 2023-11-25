@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/23 16:53:34 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:11:25 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # define WIDTH 1730
 # define SIZE 40
-# define HEIGHT 1130
+# define HEIGHT 919
 
 // data structer
 typedef struct	s_data {
@@ -70,6 +70,7 @@ typedef struct s_f
 typedef struct s_map
 {
 	int		j;
+	int		l;
 	int		a;
 	int		i;
 	int		spaces;
@@ -90,6 +91,7 @@ typedef struct s_map
 typedef struct s_game
 {
 	int		size;
+	int		start;
 	int		xplayer;
 	int		yplayer;
 	int		x;
@@ -109,7 +111,7 @@ typedef struct s_game
 	int		chight;
 	int		width;
 	int		cwidth;
-	char	**map;
+	char	**path;
 	t_map	*t_map;
 }			t_game;
 
