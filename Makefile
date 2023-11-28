@@ -6,7 +6,7 @@
 #    By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 12:53:19 by arahmoun          #+#    #+#              #
-#    Updated: 2023/11/23 15:53:05 by arahmoun         ###   ########.fr        #
+#    Updated: 2023/11/27 19:15:58 by arahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ CC = cc ${FLAGS}
 all: ${NAME}
 
 ${NAME}: ${SRCS}
-	@${CC} ${SRCS} ${MLX} ${FLAGS} -o $@
+	@${CC} ${SRCS} ${MLX_LINUX} ${FLAGS} -o $@
 	@tput setaf 2; echo "THE GAME IS READY"
 
 clean:

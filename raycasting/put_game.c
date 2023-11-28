@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:52:32 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:22:30 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ int	key_hook(int key, t_game *game)
 		ft_up(game);
 	else if (key == DOWN)
 		ft_down(game);
-	if (key == 2)
+	else if (key == 100)
 		ft_right(game);
-	if (key == 0)
+	else if (key == 97)
 		ft_lift(game);
-	//else if(key == ENTER)
-		//draw_start(game);
+	else if(key == ENTER)
+		game->start = 0;
 
 // rotation
-	if (key == 124)
+	else if (key == 65363)
 		ft_rotat_right(game);
-	if (key == 123)
+	else if (key == 65361)
 		ft_rotat_lift(game);
 
 // exit
-	if (key == ESC)
+	else if (key == ESC)
 	{
 		printf("%s ______ YOU EXIT THE GAME _____ %s", "\033[7m\033[33m",
 			"\033[0m");
@@ -62,7 +62,17 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 
 void	put_player(t_game *game)
 {
-	my_mlx_pixel_put(game, game->xplayer , game->yplayer, 16711680);
+	my_mlx_pixel_put(game, game->xplayer - 1, game->yplayer - 1, 14549214);
+	my_mlx_pixel_put(game, game->xplayer - 1, game->yplayer, 14549214);
+	my_mlx_pixel_put(game, game->xplayer - 1, game->yplayer + 1, 14549214);
+	
+	my_mlx_pixel_put(game, game->xplayer , game->yplayer - 1, 14549214);
+	my_mlx_pixel_put(game, game->xplayer , game->yplayer, 14549214);
+	my_mlx_pixel_put(game, game->xplayer , game->yplayer + 1, 14549214);
+
+	my_mlx_pixel_put(game, game->xplayer + 1, game->yplayer - 1, 14549214);
+	my_mlx_pixel_put(game, game->xplayer + 1, game->yplayer, 14549214);
+	my_mlx_pixel_put(game, game->xplayer + 1, game->yplayer + 1, 14549214);
 }
 
 void draw_grid(t_game *game, t_map *map)
@@ -134,15 +144,15 @@ void put_ground(t_game *game, t_map *map)
 void 	init_rotation(t_game *game, t_map *map)
 {
 	if (map->player == 'N')
-		game->rotatangle =  180;
+		game->rotatangle = ((3 * PI) / 2);
 	else if (map->player == 'E')
-		game->rotatangle = 270;
+		game->rotatangle = PI;
 	else if (map->player == 'S')
-		game->rotatangle = 360;
+		game->rotatangle = PI / 2;
 	else if (map->player == 'W')
-		game->rotatangle = 90;
+		game->rotatangle = PI * 2;
 
-	game->rotatspeed = (M_PI / 3) / WIDTH;
+	game->rotatspeed = (PI / 3) / WIDTH;
 }
 
 void	put_image(t_game *game, char *filename)
@@ -169,24 +179,28 @@ void init_animation(t_game *game)
 
 void	draw_start(t_game *game)
 {
-	if(game->t_map->a >= 0 && game->t_map->a < 86)
+	if(game->t_map->a >= 0 && game->t_map->a <= 86)
 	{
-		put_image(game, game->path[game->t_map->a]);
-		if(game->t_map->l++ >= 50)
+		if(game->t_map->l++ > 600)
+		{
+			put_image(game, game->path[game->t_map->a]);
 			game->t_map->a++;
+		}
 	}
-	else if(game->t_map->i >= 0 && game->t_map->i < 8)
+	else if(game->t_map->i >= 0 && game->t_map->i < 7)
 	{
-		put_image(game, game->path[game->t_map->a + game->t_map->i]);
-		if (game->t_map->l++ >= 240)
+		if (game->t_map->l++ > 3000)
+		{
+			put_image(game, game->path[game->t_map->a + game->t_map->i]);
 			game->t_map->i++;
+		}
 	}
 	else
 	{
-		if(game->t_map->l >= 348)
+		if(game->t_map->l++ > 6000)
+		{
 			game->start = 0;
-		else
-			game->t_map->l++;
+		}
 	}
 }
 
@@ -278,6 +292,7 @@ void	start_mlx(t_game *game)
 	player_pos(game, game->t_map);
 	init_rotation(game, game->t_map);
 	init_animation(game);
+	put_image(game, game->path[0]);
 
 	
 	/*  --------------------    end     ---------------------------- */

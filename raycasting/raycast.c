@@ -20,7 +20,19 @@ void    shut_rays(t_game *game, t_map *map)
     int i = 0;
 
 
-    while (i < WIDTH)
+    while (i > (WIDTH / 2) * -1)
+    {
+        pix = 0;
+        while(map->maps[(int)(game->yplayer + sin(game->rotatangle + i * game->rotatspeed) * pix) / SIZE][(int)(game->xplayer + cos(game->rotatangle + i * game->rotatspeed) * pix) / SIZE] != '1')
+        {
+            my_mlx_pixel_put(game, game->xplayer + cos(game->rotatangle + i * game->rotatspeed) * pix,
+            game->yplayer + sin(game->rotatangle + i * game->rotatspeed) * pix, 16711680);
+            pix++;
+        }
+        i--;
+    }
+    i = 0;
+    while (i < (WIDTH / 2))
     {
         pix = 0;
         while(map->maps[(int)(game->yplayer + sin(game->rotatangle + i * game->rotatspeed) * pix) / SIZE][(int)(game->xplayer + cos(game->rotatangle + i * game->rotatspeed) * pix) / SIZE] != '1')

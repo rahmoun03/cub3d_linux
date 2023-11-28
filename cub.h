@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/25 15:11:25 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:21:12 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define CUB_H
 
 # include "./get_next_line/get_next_line.h"
-# include "mlx.h"
+// # include "mlx.h"
+
+# include "/nfs/homes/arahmoun/Downloads/minilibx-linux/mlx.h"
+# include "/nfs/homes/arahmoun/Downloads/minilibx-linux/mlx_int.h"
 # include <math.h>
 
 # define RED "\033[7m\033[31m"
@@ -23,17 +26,15 @@
 # define YOLLOW "\033[7m\033[33m"
 
 
-# define ESC 53   // key escape
-# define ENTER 36 // key "enter"
-# define FOLLOW 3 // key "f"
-# define COLOR 8  // key "c"
-# define UP 13   // key "w"
-# define DOWN 1 // key "s"
-# define PENGUIN 35 // key "p"
-# define RAND_COLOR 15 // key "r"
+# define ESC 65307   // key escape
+# define ENTER 65293 // key "enter"
+# define UP 119   // key "w"
+# define DOWN 115 // key "s"
 
 # define WIDTH 1730
+# define ANGLE 90
 # define SIZE 40
+# define PI 3.14159265359
 # define HEIGHT 919
 
 // data structer
