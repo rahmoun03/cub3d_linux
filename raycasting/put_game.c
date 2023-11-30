@@ -99,7 +99,7 @@ void draw_grid(t_game *game, t_map *map)
 
 void	mlx_put_squar(t_game *game, int color)
 {
-	// printf("[  width = %d  hight = %d  color = %d ] \n", game->width, game->hight, color);
+	(void)color;
 	int w = game->width;
 	while(game->hight < SIZE * (game->y + 1))
 	{
@@ -107,6 +107,22 @@ void	mlx_put_squar(t_game *game, int color)
 		while(game->width < SIZE * (game->x + 1))
 		{
 			my_mlx_pixel_put(game, game->width, game->hight, color);
+			game->width++;
+		}
+		game->hight++;
+	}
+}
+
+void	calc_squar(t_game *game, int color)
+{
+	(void)color;
+	int w = game->width;
+	while(game->hight < SIZE * (game->y + 1))
+	{
+		game->width = w;
+		while(game->width < SIZE * (game->x + 1))
+		{
+			// my_mlx_pixel_put(game, game->width, game->hight, color);
 			game->width++;
 		}
 		game->hight++;
@@ -152,7 +168,7 @@ void 	init_rotation(t_game *game, t_map *map)
 	else if (map->player == 'W')
 		game->rotatangle = PI * 2;
 
-	game->rotatspeed = (PI / 3) / WIDTH;
+	game->rotatspeed = PI / 3 / WIDTH;
 }
 
 void	put_image(t_game *game, char *filename)
@@ -260,8 +276,72 @@ void    put_game(t_game *game, t_map *map)
 		game->hight += SIZE;
 		game->y++;
 	}
+	// put_player(game);
+	// draw_grid(game, map);
+	shut_rays(game, game->t_map);
+}
+
+void	cub_3d(t_game *game)
+{
+	black_screen(game);
+	int h;
+
+	game->hight = 0;
+	game->y = 0;
+	while(game->t_map->maps[game->y])
+	{
+		game->x = 0;
+		game->width = 0;
+		h = game->hight;
+		while(game->t_map->maps[game->y][game->x])
+		{
+			if(game->t_map->maps[game->y][game->x] == '1')
+				calc_squar(game, 255);
+			else
+			{
+				game->width +=SIZE;
+				game->hight +=SIZE;
+			}
+			game->x++;
+			game->hight = h;
+		}
+		game->hight += SIZE;
+		game->y++;
+	}
+	// put_player(game);
+	// draw_grid(game, game->t_map);
+	render_3d(game, game->t_map);
+}
+
+void	cub_2d(t_game *game)
+{
+	int h;
+
+	put_ground(game, game->t_map);
+	game->hight = 0;
+	game->y = 0;
+	while(game->t_map->maps[game->y])
+	{
+		game->x = 0;
+		game->width = 0;
+		h = game->hight;
+		while(game->t_map->maps[game->y][game->x])
+		{
+			if(game->t_map->maps[game->y][game->x] == '1')
+				mlx_put_squar(game, 255);
+			else
+			{
+				game->width +=SIZE;
+				game->hight +=SIZE;
+			}
+			game->x++;
+			game->hight = h;
+		}
+		game->hight += SIZE;
+		game->y++;
+	}
 	put_player(game);
-	draw_grid(game, map);
+	draw_grid(game, game->t_map);
 	shut_rays(game, game->t_map);
 }
 
@@ -274,7 +354,8 @@ int update(t_game *game)
 	}
 	else
 	{
-		put_game(game, game->t_map);
+		cub_3d(game);
+		cub_2d(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	}
 	return 0;

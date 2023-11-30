@@ -33,7 +33,7 @@
 
 # define WIDTH 1730
 # define ANGLE 90
-# define SIZE 40
+# define SIZE 15
 # define PI 3.14159265359
 # define HEIGHT 919
 
@@ -108,6 +108,7 @@ typedef struct s_game
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		distance;
 	int		hight;
 	int		chight;
 	int		width;
@@ -151,4 +152,16 @@ void    ft_rotat_right(t_game *game);
 void    ft_rotat_lift(t_game *game);
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+
+
+
+
+
+
+
+
+void    black_screen(t_game *game);
+void   render_3d(t_game *game, t_map *map);
+
+
 # endif
