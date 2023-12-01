@@ -162,15 +162,15 @@ void put_ground(t_game *game, t_map *map)
 void 	init_rotation(t_game *game, t_map *map)
 {
 	if (map->player == 'N')
-		game->rotatangle = ((3 * PI) / 2);
-	else if (map->player == 'E')
-		game->rotatangle = PI;
-	else if (map->player == 'S')
 		game->rotatangle = PI / 2;
+	else if (map->player == 'E')
+		game->rotatangle = 0;
+	else if (map->player == 'S')
+		game->rotatangle = -PI / 2;
 	else if (map->player == 'W')
-		game->rotatangle = PI * 2;
+		game->rotatangle = PI;
 
-	game->rotatspeed = PI / 3 / WIDTH;
+	game->rotatspeed = (PI / 3) / WIDTH;
 }
 
 void	put_image(t_game *game, char *filename)
@@ -250,32 +250,6 @@ void	player_pos(t_game *game, t_map *map)
 void	cub_3d(t_game *game)
 {
 	black_screen(game);
-	int h;
-
-	game->hight = 0;
-	game->y = 0;
-	while(game->t_map->maps[game->y])
-	{
-		game->x = 0;
-		game->width = 0;
-		h = game->hight;
-		while(game->t_map->maps[game->y][game->x])
-		{
-			if(game->t_map->maps[game->y][game->x] == '1')
-				calc_squar(game, 255);
-			else
-			{
-				game->width +=SIZE;
-				game->hight +=SIZE;
-			}
-			game->x++;
-			game->hight = h;
-		}
-		game->hight += SIZE;
-		game->y++;
-	}
-	// put_player(game);
-	// draw_grid(game, game->t_map);
 	render_3d(game, game->t_map);
 }
 
@@ -321,13 +295,9 @@ int update(t_game *game)
 	}
 	else
 	{
-		if(game->xpm)
-		{
-			mlx_clear_window(game->mlx, game->win);
-			// mlx_destroy_image(game->mlx,game->xpm);
-		}
+
 		cub_3d(game);
-		cub_2d(game);
+		// cub_2d(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	}
 	return 0;

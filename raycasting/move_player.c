@@ -18,8 +18,8 @@ void    ft_up(t_game *game)
     {
         game->yplayer -= 1;
     }
-    printf("player X : %d\n", game->xplayer);
-    printf("player Y : %d\n", game->yplayer);
+    // printf("player X : %d\n", game->xplayer);
+    // printf("player Y : %d\n", game->yplayer);
 }
 
 void    ft_down(t_game *game)
@@ -28,8 +28,8 @@ void    ft_down(t_game *game)
     {
         game->yplayer += 1;
     }
-    printf("player X : %d\n", game->xplayer);
-    printf("player Y : %d\n", game->yplayer);
+    // printf("player X : %d\n", game->xplayer);
+    // printf("player Y : %d\n", game->yplayer);
 }
 
 void    ft_right(t_game *game)
@@ -40,8 +40,8 @@ void    ft_right(t_game *game)
     {
         game->xplayer += 1;
     }
-    printf("player X : %d\n", game->xplayer);
-    printf("player Y : %d\n", game->yplayer);
+    // printf("player X : %d\n", game->xplayer);
+    // printf("player Y : %d\n", game->yplayer);
 }
 
 void    ft_lift(t_game *game)
@@ -52,8 +52,8 @@ void    ft_lift(t_game *game)
     {
         game->xplayer -=  1;
     }
-    printf("player X : %d\n", game->xplayer);
-    printf("player Y : %d\n", game->yplayer);
+    // printf("player X : %d\n", game->xplayer);
+    // printf("player Y : %d\n", game->yplayer);
 }
 
 void    ft_rotat_right(t_game *game)

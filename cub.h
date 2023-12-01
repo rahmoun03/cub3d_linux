@@ -33,7 +33,7 @@
 
 # define WIDTH 1730
 # define ANGLE 90
-# define SIZE 15
+# define SIZE 64
 # define PI 3.14159265359
 # define HEIGHT 919
 
