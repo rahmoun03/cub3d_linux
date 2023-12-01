@@ -108,7 +108,9 @@ typedef struct s_game
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		distance;
+	double	distance;
+	double	new_distance;
+	double	projectedWallHeight;
 	int		hight;
 	int		chight;
 	int		width;
@@ -135,12 +137,11 @@ int	ft_wc_l(char **str);
 
 void	start_mlx(t_game *game);
 void    put_game(t_game *game, t_map *map);
-void    shut_rays(t_game *game, t_map *map);
 void    direction(t_game *game, t_map *map);
 void	put_player(t_game *game);
-void	mlx_put_squar(t_game *game, int color);
 void    ft_up(t_game *game);
 void	draw_grid(t_game *game, t_map *map);
+void	draw_start(t_game *game);
 
 // moves
 void    ft_up(t_game *game);
@@ -151,16 +152,22 @@ void 	put_ground(t_game *game, t_map *map);
 void    ft_rotat_right(t_game *game);
 void    ft_rotat_lift(t_game *game);
 
+
+
+// my mlx
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void	mlx_put_squar(t_game *game, int color);
 
 
 
-
+void	cub_3d(t_game *game);
+void	cub_2d(t_game *game);
 
 
 
 
 void    black_screen(t_game *game);
+void    shut_rays(t_game *game, t_map *map);
 void   render_3d(t_game *game, t_map *map);
 
 
