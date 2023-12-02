@@ -16,16 +16,31 @@ void    black_screen(t_game *game)
     }
 }
 
+// rgb = 65536 * r + 256 * g + b;
+
 void    print_wall(t_game *game, int color)
 {
+    int ceiling = (game->t_map->ceiling.r * 65536) + (game->t_map->ceiling.g * 256) + game->t_map->ceiling.b;
+    int floor = (game->t_map->floor.r * 65536) + (game->t_map->floor.g * 256) + game->t_map->floor.b;
     int top = (HEIGHT / 2) - game->projectedWallHeight / 2;
     int bottom = top + game->projectedWallHeight;
-    game->y = top;
+    game->y = 0;
+    while (game->y < top)
+    {
+        my_mlx_pixel_put(game, game->x, game->y, ceiling);
+        game->y++;
+    }
     while (game->y <= bottom)
     {
         my_mlx_pixel_put(game, game->x, game->y, color);
         game->y++;
     }
+    while (game->y < HEIGHT)
+    {
+        my_mlx_pixel_put(game, game->x, game->y, floor);
+        game->y++;
+    }
+    
 }
 
 
