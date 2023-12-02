@@ -30,6 +30,9 @@
 # define ENTER 65293 // key "enter"
 # define UP 119   // key "w"
 # define DOWN 115 // key "s"
+# define RIGHT 100 // key "d"
+# define LIFT 97 // key "a"
+
 
 # define WIDTH 1730
 # define ANGLE 90
@@ -93,6 +96,9 @@ typedef struct s_game
 {
 	int		size;
 	int		start;
+	int		walkdirection;
+	int 	rotaion;
+	int		walk_r_l;
 	int		xplayer;
 	int		yplayer;
 	int		x;

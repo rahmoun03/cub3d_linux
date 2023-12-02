@@ -25,21 +25,21 @@ int	key_hook(int key, t_game *game)
 	// (void)game;
 // moves
 	if (key == UP)
-		ft_up(game);
+		game->walkdirection = 1;
 	else if (key == DOWN)
-		ft_down(game);
-	else if (key == 100)
-		ft_right(game);
-	else if (key == 97)
-		ft_lift(game);
+        game->walkdirection = -1;
+	else if (key == RIGHT)
+        game->walk_r_l = 1;
+	else if (key == LIFT)
+        game->walk_r_l = -1;
 	else if(key == ENTER)
 		game->start = 0;
 
 // rotation
 	else if (key == 65363)
-		ft_rotat_right(game);
+    	game->rotaion = 1;
 	else if (key == 65361)
-		ft_rotat_lift(game);
+   		game->rotaion = -1;
 
 // exit
 	else if (key == ESC)
@@ -48,6 +48,28 @@ int	key_hook(int key, t_game *game)
 			"\033[0m");
 		exit(0);
 	}
+	return (key);
+}
+
+int	release_key_hook(int key, t_game *game)
+{
+// moves
+	if (key == UP)
+		game->walkdirection = 0;
+	else if (key == DOWN)
+        game->walkdirection = 0;
+	else if (key == RIGHT)
+        game->walk_r_l = 0;
+	else if (key == LIFT)
+        game->walk_r_l = 0;
+
+
+// rotation
+	else if (key == 65363)
+    	game->rotaion = 0;
+	else if (key == 65361)
+   		game->rotaion = 0;
+
 	return (key);
 }
 
@@ -65,17 +87,19 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 
 void	put_player(t_game *game)
 {
-	my_mlx_pixel_put(game, game->xplayer - 1, game->yplayer - 1, 14549214);
-	my_mlx_pixel_put(game, game->xplayer - 1, game->yplayer, 14549214);
-	my_mlx_pixel_put(game, game->xplayer - 1, game->yplayer + 1, 14549214);
+	float x = ((float)game->xplayer / SIZE) * 10;
+	float y = ((float)game->yplayer / SIZE) * 10;
+	my_mlx_pixel_put(game, x - 1, y - 1, 14549214);
+	my_mlx_pixel_put(game, x - 1, y, 14549214);
+	my_mlx_pixel_put(game, x - 1, y + 1, 14549214);
 	
-	my_mlx_pixel_put(game, game->xplayer , game->yplayer - 1, 14549214);
-	my_mlx_pixel_put(game, game->xplayer , game->yplayer, 14549214);
-	my_mlx_pixel_put(game, game->xplayer , game->yplayer + 1, 14549214);
+	my_mlx_pixel_put(game, x , y - 1, 14549214);
+	my_mlx_pixel_put(game, x , y, 14549214);
+	my_mlx_pixel_put(game, x , y + 1, 14549214);
 
-	my_mlx_pixel_put(game, game->xplayer + 1, game->yplayer - 1, 14549214);
-	my_mlx_pixel_put(game, game->xplayer + 1, game->yplayer, 14549214);
-	my_mlx_pixel_put(game, game->xplayer + 1, game->yplayer + 1, 14549214);
+	my_mlx_pixel_put(game, x + 1, y - 1, 14549214);
+	my_mlx_pixel_put(game, x + 1, y, 14549214);
+	my_mlx_pixel_put(game, x + 1, y + 1, 14549214);
 }
 
 void draw_grid(t_game *game, t_map *map)
@@ -103,10 +127,10 @@ void draw_grid(t_game *game, t_map *map)
 void	mlx_put_squar(t_game *game, int color)
 {
 	int w = game->width;
-	while(game->hight < SIZE * (game->y + 1))
+	while(game->hight < 10 * (game->y + 1))
 	{
 		game->width = w;
-		while(game->width < SIZE * (game->x + 1))
+		while(game->width < 10 * (game->x + 1))
 		{
 			my_mlx_pixel_put(game, game->width, game->hight, color);
 			game->width++;
@@ -148,13 +172,13 @@ void put_ground(t_game *game, t_map *map)
 				mlx_put_squar(game, 64682174);
 			else
 			{
-				game->width += SIZE;
-				game->hight += SIZE;
+				game->width += 10;
+				game->hight += 10;
 			}
 			game->x++;
 			game->hight = h;
 		}
-		game->hight += SIZE;
+		game->hight += 10;
 		game->y++;
 	}
 }
@@ -162,13 +186,13 @@ void put_ground(t_game *game, t_map *map)
 void 	init_rotation(t_game *game, t_map *map)
 {
 	if (map->player == 'N')
-		game->rotatangle = PI / 2;
+		game->rotatangle = 3 * PI / 2;
 	else if (map->player == 'E')
-		game->rotatangle = 0;
-	else if (map->player == 'S')
-		game->rotatangle = -PI / 2;
-	else if (map->player == 'W')
 		game->rotatangle = PI;
+	else if (map->player == 'S')
+		game->rotatangle = PI / 2;
+	else if (map->player == 'W')
+		game->rotatangle = 0;
 
 	game->rotatspeed = (PI / 3) / WIDTH;
 }
@@ -246,6 +270,23 @@ void	player_pos(t_game *game, t_map *map)
 	}
 }
 
+void	check_moves(t_game *game)
+{
+	if(game->walkdirection == 1)
+		ft_up(game);
+	else if(game->walkdirection == -1)
+		ft_down(game);
+
+	if(game->walk_r_l == 1)
+		ft_right(game);
+	else if(game->walk_r_l == -1)
+		ft_lift(game);
+	
+	if(game->rotaion == 1)
+		ft_rotat_right(game);
+	else if(game->rotaion == -1)
+		ft_rotat_lift(game);
+}
 
 void	cub_3d(t_game *game)
 {
@@ -271,13 +312,13 @@ void	cub_2d(t_game *game)
 				mlx_put_squar(game, 255);
 			else
 			{
-				game->width +=SIZE;
-				game->hight +=SIZE;
+				game->width +=10;
+				game->hight +=10;
 			}
 			game->x++;
 			game->hight = h;
 		}
-		game->hight += SIZE;
+		game->hight += 10;
 		game->y++;
 	}
 	put_player(game);
@@ -295,9 +336,9 @@ int update(t_game *game)
 	}
 	else
 	{
-
+		check_moves(game);
 		cub_3d(game);
-		// cub_2d(game);
+		cub_2d(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	}
 	return 0;
@@ -320,6 +361,7 @@ void	start_mlx(t_game *game)
 	
 	/*  --------------------    end     ---------------------------- */
 	mlx_hook(game->win, 2, 1L << 0, key_hook, game);
+	mlx_hook(game->win, 3, 1L << 1, release_key_hook, game);
 	mlx_hook(game->win, 17, 1L << 0, ft_exit, game);
 	mlx_loop_hook(game->mlx, update, game);
 	mlx_loop(game->mlx);

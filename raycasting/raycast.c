@@ -31,6 +31,8 @@ void    print_wall(t_game *game, int color)
 
 void    shut_rays(t_game *game, t_map *map)
 {
+    float x = ((float)game->xplayer / SIZE) * 10;
+    float y = ((float)game->yplayer / SIZE) * 10;
     int pix ;
     int i = (WIDTH / 2) * -1;
     game->x = 0;
@@ -38,11 +40,11 @@ void    shut_rays(t_game *game, t_map *map)
     while (rayangle <= PI / 6 && game->x < WIDTH)
     {
         pix = 0;
-        while(map->maps[(int)(game->yplayer + sin(game->rotatangle + rayangle) * pix) / SIZE]
-            [(int)(game->xplayer + cos(game->rotatangle + rayangle) * pix) / SIZE] != '1')
+        while(map->maps[(int)(y + (sin(game->rotatangle + rayangle) * pix)) / 10]
+            [(int)(x + (cos(game->rotatangle + rayangle) * pix)) / 10] != '1')
         {
-            my_mlx_pixel_put(game, ((game->xplayer) + cos(game->rotatangle + rayangle) * pix),
-            (game->yplayer + sin(game->rotatangle + rayangle) * pix), 16711680);
+            my_mlx_pixel_put(game, (x + cos(game->rotatangle + rayangle) * pix),
+            (y + (sin(game->rotatangle + rayangle) * pix)), 16711680);
             pix++;
         }
         i++;
