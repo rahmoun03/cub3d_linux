@@ -49,7 +49,6 @@ void    shut_rays(t_game *game, t_map *map)
     float x = ((float)game->xplayer / SIZE) * 10;
     float y = ((float)game->yplayer / SIZE) * 10;
     int pix ;
-    int i = (WIDTH / 2) * -1;
     game->x = 0;
     game->rayangle = -PI / 6;
     while (game->rayangle <= PI / 6 && game->x < WIDTH)
@@ -62,7 +61,6 @@ void    shut_rays(t_game *game, t_map *map)
             (y + (sin(game->rotatangle + game->rayangle) * pix)), 16711680);
             pix++;
         }
-        i++;
         game->rayangle += game->rotatspeed;
         game->x++;
     }
@@ -72,7 +70,6 @@ void   render_3d(t_game *game, t_map *map)
 {
 	game->distance = 0;
 	int pix ;
-	int i = (WIDTH / 2) * -1;
     game->rayangle = (-1 * PI) / 6;
 	game->x = 0;
 
@@ -93,8 +90,6 @@ void   render_3d(t_game *game, t_map *map)
 		game->distance = game->new_distance;
 		game->projectedWallHeight = (SIZE * WIDTH) / game->distance;
 		print_wall(game, 16711680);
-		
-		i++;
 		game->rayangle += game->rotatspeed;
 		game->x++;
 	}
