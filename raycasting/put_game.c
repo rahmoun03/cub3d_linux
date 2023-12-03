@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:22:30 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:16:10 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,6 +326,26 @@ void	cub_2d(t_game *game)
 	shut_rays(game, game->t_map);
 }
 
+void	mini_map(t_game *game)
+{
+	int x = ((float)game->xplayer / SIZE) * 10;
+	int y = ((float)game->yplayer / SIZE) * 10;
+	game->x = 10;
+	game->y = 10;
+	my_mlx_pixel_put(game, x, y, 255);
+
+	while (game->y < MINI_HEIGHT)
+	{
+		game->x = 10;
+		while (game->x < MINI_WIDTH)
+		{
+			my_mlx_pixel_put(game, x, y, 14142664);
+			game->x++;
+		}
+		game->y++;
+	}
+}
+
 int update(t_game *game)
 {
 	if(game->start)
@@ -338,6 +358,7 @@ int update(t_game *game)
 	{
 		check_moves(game);
 		cub_3d(game);
+		// mini_map(game);
 		cub_2d(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	}

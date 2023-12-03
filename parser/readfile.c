@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   readfile.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 10:31:39 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/22 10:19:41 by arahmoun         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../cub.h"
 
 void double_nl(t_map *map)
@@ -112,6 +100,7 @@ int	ft_len(char *str)
 void 	map_closed(t_map *map)
 {
 	t_ft	*tmp;
+	int i = 0;
 
 	tmp = (t_ft *)malloc(sizeof(t_ft));
 	tmp->i = 0;
@@ -130,9 +119,11 @@ void 	map_closed(t_map *map)
 		printf("Error map_closed()\n");
 		exit(0);
 	}
-	
-	for(int i = 0; tmp->maps[i]; i++)
+	while(tmp->maps[i])
+	{
 		printf("%s\n", tmp->maps[i]);
+		i++;
+	}
 		
 	ft_free_tmp(tmp->maps);
 	free(tmp->maps);
@@ -156,32 +147,53 @@ void	flood_fill(t_ft *tmp, int i, int j)
 		flood_fill(tmp, i, j - 1);
 }
 
-void	c_f_first(char **numbers)
+int ft_iss_digit(char c) 
 {
-	int i;
-	int j;
+    return c >= '0' && c <= '9';
+}
 
-	i = 0;
-	while (numbers[i])
+void c_f_first(char **numbers) 
+{
+    int i; 
+	int j;
+    int last_digit;
+
+    i = 0;
+    while (numbers[i]) 
 	{
-		j = 0;
-		while (numbers[i][j])
+        j = 0;
+        last_digit = 0; 
+
+        while (numbers[i][j]) 
 		{
-			if (ft_is_digit(numbers[i][j]))
-				j++;
-			else
+            if (ft_iss_digit(numbers[i][j])) 
 			{
-				printf("Error : c_f_first(%c)\n", numbers[i][j]);
-				exit(0);
-			}
-		}
-		i++;
-	}
-	if ( i != 3 || numbers[3] != NULL)
+                last_digit = 1; 
+                j++;
+            } 
+			else if (numbers[i][j] == ' ') 
+			{
+                if (last_digit && numbers[i][j + 1] != '\0' && ft_iss_digit(numbers[i][j + 1])) 
+				{
+                    printf("Error Space inside a number in '%s'\n", numbers[i]);
+                    exit(0);
+                }
+                j++;
+            } 
+			else 
+			{
+                printf("Error : c_f_first(non-digit character '%c')\n", numbers[i][j]);
+                exit(0);
+            }
+        }
+        i++;
+    }
+
+    if (i != 3 || numbers[3] != NULL) 
 	{
-		printf("Error : number c_f_first()\n");
-		exit(0);
-	}
+        printf("Error : Incorrect number of elements in c_f_first()\n");
+        exit(0);
+    }
 }
 
 void	c_f_end(t_map *map)
@@ -292,55 +304,112 @@ char	*set_path(t_map *map, char *str)
 
 int check_texture(t_map *map, char *str)
 {
-	if (str[map->i] == 'N' && str[map->i + 1] && str[map->i + 1] == 'O')
-	{ 
-		map->i += 2;
-		map->no = set_path(map, str);
-		return 1;
-	}
-	else if (str[map->i] == 'S' && str[map->i + 1] == 'O')
+	char *path;
+
+	if (str[map->i] == 'N' && str[map->i + 1] && str[map->i + 1] == 'O')	
 	{
-		map->i += 2;
-		map->so = set_path(map, str);
-		return 1;
-	}
-	else if (str[map->i] == 'W' && str[map->i + 1] == 'E')
+        map->i += 2;
+        path = set_path(map, str);
+        if (!check_path(path, ".xpm")) 
+		{
+            printf("Erreur Le chemin de la texture 'NO' ne se termine pas par '.xpm'\n");
+            free(path);
+            return 0;
+        }
+        map->no = path;
+        return 1;
+    }
+	if (str[map->i] == 'S' && str[map->i + 1] && str[map->i + 1] == 'O')	
 	{
-		map->i += 2;
-		map->we = set_path(map, str);
-		return 1;
-	}
-	else if (str[map->i] == 'E' && str[map->i + 1] == 'A')
+        map->i += 2;
+        path = set_path(map, str);
+        if (!check_path(path, ".xpm")) 
+		{
+            printf("Erreur Le chemin de la texture 'SO' ne se termine pas par '.xpm'\n");
+            free(path);
+            return 0;
+        }
+        map->so = path;
+        return 1;
+    }
+	if (str[map->i] == 'W' && str[map->i + 1] && str[map->i + 1] == 'E')	
 	{
-		map->i += 2;
-		map->ea = set_path(map, str);
-		return 1;
-	}
+        map->i += 2;
+        path = set_path(map, str);
+        if (!check_path(path, ".xpm")) 
+		{
+            printf("Erreur Le chemin de la texture 'WE' ne se termine pas par '.xpm'\n");
+            free(path);
+            return 0;
+        }
+        map->we = path;
+        return 1;
+    }
+	if (str[map->i] == 'E' && str[map->i + 1] && str[map->i + 1] == 'A')	
+	{
+        map->i += 2;
+        path = set_path(map, str);
+        if (!check_path(path, ".xpm")) 
+		{
+            printf("Erreur Le chemin de la texture 'EA' ne se termine pas par '.xpm'\n");
+            free(path);
+            return 0;
+        }
+        map->ea = path;
+        return 1;
+    }
 	return 0;
 }
 
-void	check_and_set(t_map *map, char *str)
+int check_commas(const char *str, int start, int end) 
 {
-	if (!check_texture(map, str))
+    int count = 0;
+	int i = start;
+	while(i < end)
 	{
-		if (str[map->i] == 'C'
-			&& (str[map->i + 1] == ' ' || str[map->i + 1] == '\t'))
-		{
-			map->i++;
-			map->c = set_path(map, str);
-		}
-		else if (str[map->i] == 'F'
-			&& (str[map->i + 1] == ' ' || str[map->i + 1] == '\t'))
-		{
-			map->i++;
-			map->f = set_path(map, str);
-		}
-		else
-		{
-			printf("Error : check_and_set()\n");
-			exit (0);
-		}
+		 if (str[i] == ',')
+            count++;
+		i++;
 	}
+    return count == 2;
+}
+
+void check_and_set(t_map *map, char *str) 
+{
+    if (!check_texture(map, str))
+	{
+        int start = map->i;
+        int end = start;
+
+        while (str[end] != '\0' && str[end] != '\n') 
+            end++;
+
+        if (str[map->i] == 'C' && (str[map->i + 1] == ' ' || str[map->i + 1] == '\t')) 
+		{
+            if (!check_commas(str, start, end)) 
+			{
+                printf("Erreur: Nombre incorrect de virgules pour 'C'\n");
+                exit(0);
+            }
+            map->i++;
+            map->c = set_path(map, str);
+        }
+        else if (str[map->i] == 'F' && (str[map->i + 1] == ' ' || str[map->i + 1] == '\t')) 
+		{
+            if (!check_commas(str, start, end)) 
+			{
+                printf("Erreur: Nombre incorrect de virgules pour 'F'\n");
+                exit(0);
+            }
+            map->i++;
+            map->f = set_path(map, str);
+        }
+        else 
+		{
+            printf("Erreur : check_and_set()\n");
+            exit(0);
+        }
+    }
 }
 
 int element_is_full(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:21:12 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:19:11 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@
 # define LIFT 97 // key "a"
 
 
+# define MINI_HEIGHT 90
+# define MINI_WIDTH 110
 # define WIDTH 1730
+# define HEIGHT 919
 # define ANGLE 90
 # define SIZE 64
 # define PI 3.14159265359
-# define HEIGHT 919
 
 // data structer
 typedef struct	s_data {
@@ -99,10 +101,11 @@ typedef struct s_game
 	int		walkdirection;
 	int 	rotaion;
 	int		walk_r_l;
-	int		xplayer;
-	int		yplayer;
+	float	xplayer;
+	float	yplayer;
 	int		x;
 	int		y;
+	double	rayangle;
 	double	rotatangle;
 	double	rotatspeed;
 	int		movespeed;
@@ -176,5 +179,6 @@ void    black_screen(t_game *game);
 void    shut_rays(t_game *game, t_map *map);
 void   render_3d(t_game *game, t_map *map);
 
+int	check_path(char *str,char *extension);
 
 # endif

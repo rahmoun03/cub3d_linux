@@ -6,21 +6,21 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/23 15:15:52 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:41:01 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 
-int	check_path(char *str)
+int	check_path(char *str,char *extension)
 {
 	int		i;
 	int		j;
 	char	*cub;
 
 	j = 0;
-	cub = ft_strdup(".cub");
+	cub = ft_strdup(extension);
 	i = ft_len(str) - 4;
 	while (cub[j] && str[i])
 	{
@@ -67,7 +67,7 @@ int	main(int ac, char **av)
 	game = (t_game *)malloc(sizeof(t_game));
 	game->t_map = ptr;
 	fd = open(av[1], O_RDWR);
-	if (ac != 2 || fd == -1 || !check_path(av[1]))
+	if (ac != 2 || fd == -1 || !check_path(av[1], ".cub"))
 	{
 		printf("Error\n%sinvalid path\n%s ", RED, DEFFAULT);
 		return (0);
