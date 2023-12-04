@@ -44,20 +44,54 @@ void    print_wall(t_game *game, int color)
 }
 
 
+int check_rays_2D(t_game *game, t_map *map, int pix, double x, double y)
+{
+	if(map->maps[(int)((y + (sin(game->rotatangle + game->rayangle) * pix)) - 1) / 10]
+        [(int)(x + (cos(game->rotatangle + game->rayangle) * pix)) / 10] == '1')
+		return 0;
+	else if(map->maps[(int)((y + (sin(game->rotatangle + game->rayangle) * pix)) + 1) / 10]
+		[(int)(x + (cos(game->rotatangle + game->rayangle) * pix)) / 10] == '1')
+		return 0;
+	else if(map->maps[(int)((y + (sin(game->rotatangle + game->rayangle) * pix))) / 10]
+		[(int)((x + (cos(game->rotatangle + game->rayangle) * pix)) + 1) / 10] == '1')
+		return 0;
+	else if(map->maps[(int)((y + (sin(game->rotatangle + game->rayangle) * pix))) / 10]
+		[(int)((x + (cos(game->rotatangle + game->rayangle) * pix)) - 1) / 10] == '1')
+		return 0;
+	return (1);
+}
+
+int check_rays_3D(t_game *game, t_map *map, int pix)
+{
+	if(map->maps[(int)((game->yplayer + (sin(game->rotatangle + game->rayangle) * pix)) - 1) / SIZE]
+        [(int)(game->xplayer + (cos(game->rotatangle + game->rayangle) * pix)) / SIZE] == '1')
+		return 0;
+	else if(map->maps[(int)((game->yplayer + (sin(game->rotatangle + game->rayangle) * pix)) + 1) / SIZE]
+		[(int)(game->xplayer + (cos(game->rotatangle + game->rayangle) * pix)) / SIZE] == '1')
+		return 0;
+	else if(map->maps[(int)((game->yplayer + (sin(game->rotatangle + game->rayangle) * pix))) / SIZE]
+		[(int)((game->xplayer + (cos(game->rotatangle + game->rayangle) * pix)) + 1) / SIZE] == '1')
+		return 0;
+	else if(map->maps[(int)((game->yplayer + (sin(game->rotatangle + game->rayangle) * pix))) / SIZE]
+		[(int)((game->xplayer + (cos(game->rotatangle + game->rayangle) * pix)) - 1) / SIZE] == '1')
+		return 0;
+	return (1);
+}
+
+
 void    shut_rays(t_game *game, t_map *map)
 {
-    float x = ((float)game->xplayer / SIZE) * 10;
-    float y = ((float)game->yplayer / SIZE) * 10;
-    int pix ;
+    double x = ((double)game->xplayer / SIZE) * 10;
+    double y = ((double)game->yplayer / SIZE) * 10;
+    double pix ;
     game->x = 0;
     game->rayangle = -PI / 6;
     while (game->rayangle <= PI / 6 && game->x < WIDTH)
     {
-        pix = 0;
-        while(map->maps[(int)(y + (sin(game->rotatangle + game->rayangle) * pix)) / 10]
-            [(int)(x + (cos(game->rotatangle + game->rayangle) * pix)) / 10] != '1')
+        pix = 0.0;
+        while(check_rays_2D(game, map, pix, x, y))
         {
-            my_mlx_pixel_put(game, (x + cos(game->rotatangle + game->rayangle) * pix),
+            my_mlx_pixel_put(game, (x + (cos(game->rotatangle + game->rayangle) * pix)),
             (y + (sin(game->rotatangle + game->rayangle) * pix)), 16711680);
             pix++;
         }
@@ -69,15 +103,14 @@ void    shut_rays(t_game *game, t_map *map)
 void   render_3d(t_game *game, t_map *map)
 {
 	game->distance = 0;
-	int pix ;
+	double pix ;
     game->rayangle = (-1 * PI) / 6;
 	game->x = 0;
 
 	while (game->rayangle <= PI / 6 && game->x < WIDTH)
 	{
-		pix = 0;
-		while(map->maps[(int)((game->yplayer + (sin(game->rotatangle + (game->rayangle)) * pix)) / SIZE)]
-			[(int)((game->xplayer + (cos(game->rotatangle + (game->rayangle)) * pix)) / SIZE) ] != '1')
+		pix = 0.0;
+		while(check_rays_3D(game, map, pix))
 		{
 			pix++;
 		}
