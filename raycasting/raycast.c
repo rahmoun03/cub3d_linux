@@ -81,7 +81,10 @@ int check_rays_3D(t_game *game, t_map *map, int pix)
 
 void    shut_rays(t_game *game, t_map *map)
 {
+    int color;
     double x = ((double)game->xplayer / SIZE) * 10;
+    double xp = MINI_WIDTH / 2;
+    double yp = MINI_HEIGHT / 2;
     double y = ((double)game->yplayer / SIZE) * 10;
     double pix ;
     game->x = 0;
@@ -89,10 +92,11 @@ void    shut_rays(t_game *game, t_map *map)
     while (game->rayangle <= PI / 6 && game->x < WIDTH)
     {
         pix = 0.0;
-        while(check_rays_2D(game, map, pix, x, y))
+        color = 15790080;
+        while(pix <= 50 && check_rays_2D(game, map, pix, x, y))
         {
-            my_mlx_pixel_put(game, (x + (cos(game->rotatangle + game->rayangle) * pix)),
-            (y + (sin(game->rotatangle + game->rayangle) * pix)), 16711680);
+            my_mlx_pixel_put(game, (xp + (cos(game->rotatangle + game->rayangle) * pix)),
+            (yp + (sin(game->rotatangle + game->rayangle) * pix)), color);
             pix++;
         }
         game->rayangle += game->rotatspeed;

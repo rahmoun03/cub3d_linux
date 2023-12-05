@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/03 20:53:08 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 09:11:26 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define LIFT 97 // key "a"
 
 
-# define MINI_HEIGHT 90
-# define MINI_WIDTH 110
+# define MINI_HEIGHT 170
+# define MINI_WIDTH 210
 # define WIDTH 1730
 # define HEIGHT 919
 # define ANGLE 90
@@ -98,6 +98,8 @@ typedef struct s_game
 {
 	int		size;
 	int		start;
+	int		welcome;
+	int		condition;
 	int		walkdirection;
 	int 	rotaion;
 	int		walk_r_l;
@@ -125,6 +127,7 @@ typedef struct s_game
 	int		width;
 	int		cwidth;
 	char	**path;
+	char	**bomb;
 	t_map	*t_map;
 }			t_game;
 

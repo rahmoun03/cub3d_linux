@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:17:12 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/04 03:11:04 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 05:41:41 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 int check_player_move(t_game *game, int x, int y)
 {
-    if (game->t_map->maps[(int)(y / SIZE)][(int)(x / SIZE)] == '1')
+    if (game->t_map->maps[(y / SIZE)][(x / SIZE)] == '1')
         return 0;
-    if (game->t_map->maps[(int)(y / SIZE)][(int)((x + 1) / SIZE)] == '1')
+    if (game->t_map->maps[(y / SIZE)][((x + 1) / SIZE)] == '1')
         return 0;
-    if (game->t_map->maps[(int)(y / SIZE)][(int)((x - 1) / SIZE)] == '1')
+    if (game->t_map->maps[(y / SIZE)][((x - 1) / SIZE)] == '1')
         return 0;
 
-    if (game->t_map->maps[(int)((y + 1) / SIZE)][(int)((x + 1) / SIZE)] == '1')
+    if (game->t_map->maps[((y + 1) / SIZE)][((x + 1) / SIZE)] == '1')
         return 0;
-    if (game->t_map->maps[(int)((y + 1) / SIZE)][(int)((x - 1) / SIZE)] == '1')
+    if (game->t_map->maps[((y + 1) / SIZE)][((x - 1) / SIZE)] == '1')
         return 0;
-    if (game->t_map->maps[(int)((y + 1) / SIZE)][(int)(x / SIZE)] == '1')
+    if (game->t_map->maps[((y + 1) / SIZE)][(x / SIZE)] == '1')
         return 0;
     
-    if (game->t_map->maps[(int)((y - 1) / SIZE)][(int)((x + 1) / SIZE)] == '1')
+    if (game->t_map->maps[((y - 1) / SIZE)][((x + 1) / SIZE)] == '1')
         return 0;
-    if (game->t_map->maps[(int)((y - 1) / SIZE)][(int)((x - 1) / SIZE)] == '1')
+    if (game->t_map->maps[((y - 1) / SIZE)][((x - 1) / SIZE)] == '1')
         return 0;
-    if (game->t_map->maps[(int)((y - 1) / SIZE)][(int)(x / SIZE)] == '1')
+    if (game->t_map->maps[((y - 1) / SIZE)][(x / SIZE)] == '1')
         return 0;
     
     return 1;
