@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/05 09:11:26 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/06 00:30:26 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,17 @@ typedef struct s_map
 	t_f		floor;
 }			t_map;
 
+typedef struct s_imag {
+	void *img;
+	void *addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		height;
+	int		weight;
+	int		next;
+} t_imag;
+
 typedef struct s_game
 {
 	int		size;
@@ -115,6 +126,7 @@ typedef struct s_game
 	void	*mlx;
 	void	*xpm;
 	void	*img;
+	t_imag	pimg;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
