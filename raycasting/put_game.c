@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/06 00:38:48 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:14:41 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,70 +104,6 @@ void	put_player(t_game *game)
 	my_mlx_pixel_put(game, x + 1, y + 1, 14549214);
 }
 
-void draw_grid(t_game *game, t_map *map)
-{
-	int x;
-	int y;
-	int j = -1;
-
-	y = 0;
-	while (y < ft_wc_l(map->maps) * SIZE)
-	{
-		x = 0;
-		if (y % SIZE == 0)
-			j++;
-		while (x < ft_len(map->maps[j]) * SIZE)
-		{
-			if(x % SIZE == 0  || y % SIZE == 0)
-				my_mlx_pixel_put(game, x, y, 5308240);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	mlx_put_squar(t_game *game, int color)
-{
-	int w = game->width;
-	while(game->hight < 10 * (game->y + 1))
-	{
-		game->width = w;
-		while(game->width < 10 * (game->x + 1))
-		{
-			my_mlx_pixel_put(game, game->width, game->hight, color);
-			game->width++;
-		}
-		game->hight++;
-	}
-}
-
-void put_ground(t_game *game, t_map *map)
-{
-	int h;
-
-	game->y = 0;
-	game->hight = 0;
-	while(map->maps[game->y] && game->hight < HEIGHT)
-	{
-		game->x = 0;
-		game->width = 0;
-		h = game->hight;
-		while(map->maps[game->y][game->x] && game->width < WIDTH)
-		{
-			if(map->maps[game->y][game->x] == '0' || map->maps[game->y][game->x] == map->player)
-				mlx_put_squar(game, 64682174);
-			else
-			{
-				game->width += 10;
-				game->hight += 10;
-			}
-			game->x++;
-			game->hight = h;
-		}
-		game->hight += 10;
-		game->y++;
-	}
-}
 
 void 	init_rotation(t_game *game, t_map *map)
 {
@@ -295,6 +231,7 @@ unsigned int	get_pixel_img(t_imag img, int x, int y)
 }
 
 void render_player (t_game *game) {
+	init_player(game, game->bomb[game->pimg.next]);
 	int x = 2 * (WIDTH / 5);
 	int y = HEIGHT - game->pimg.height;
 	int x_player = 0;
@@ -320,10 +257,9 @@ void	cub_3d(t_game *game)
 	game->pimg.next++;
 	if (game->pimg.next > 90)
 		game->pimg.next = 0;
-	init_player(game, game->bomb[game->pimg.next]);
 	black_screen(game);
 	render_3d(game, game->t_map);
-	render_player(game);
+	// render_player(game);
 }
 
 void mini_ground(t_game *game)

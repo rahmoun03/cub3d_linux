@@ -16,9 +16,25 @@ void    black_screen(t_game *game)
     }
 }
 
+int check_color(t_game *game, int xp, int yp)
+{
+    // int ang = game->rotatangle * (180 / PI);
+    (void)yp;
+    (void)xp;
+    if (game->t_map->maps[yp / SIZE][((xp + 1)/ SIZE)] == '1') // limn
+        return 255; // ZRA9
+    else if (game->t_map->maps[((yp + 1)/ SIZE)][xp / SIZE] == '1') // lta7t
+        return 7925815; // LMCHA3CHA3
+    else if (game->t_map->maps[(yp) / SIZE][((xp - 1) / SIZE)] == '1') // lisr
+        return 16389175; // YAJORY
+    else if (game->t_map->maps[((yp - 1) / SIZE)][xp / SIZE] == '1') // lfo9
+        return 7864440; // MOVE
+    return 0;
+}
+
 // rgb = 65536 * r + 256 * g + b;
 
-void    print_wall(t_game *game, int color)
+void    print_wall(t_game *game, int x_pos, int y_pos)
 {
     int ceiling = (game->t_map->ceiling.r * 65536) + (game->t_map->ceiling.g * 256) + game->t_map->ceiling.b;
     int floor = (game->t_map->floor.r * 65536) + (game->t_map->floor.g * 256) + game->t_map->floor.b;
@@ -32,7 +48,7 @@ void    print_wall(t_game *game, int color)
     }
     while (game->y <= bottom)
     {
-        my_mlx_pixel_put(game, game->x, game->y, color);
+        my_mlx_pixel_put(game, game->x, game->y, check_color(game, x_pos, y_pos));
         game->y++;
     }
     while (game->y < HEIGHT)
@@ -126,7 +142,7 @@ void   render_3d(t_game *game, t_map *map)
 			game->new_distance = game->distance * cos(PI - (angle));
 		game->distance = game->new_distance;
 		game->projectedWallHeight = (SIZE * WIDTH) / game->distance;
-		print_wall(game, 16711680);
+		print_wall(game, game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)));
 		game->rayangle += game->rotatspeed;
 		game->x++;
 	}

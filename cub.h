@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/06 00:30:26 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:43:34 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 
 # define MINI_HEIGHT 170
-# define MINI_WIDTH 210
+# define MINI_WIDTH 250
 # define WIDTH 1730
 # define HEIGHT 919
 # define ANGLE 90
