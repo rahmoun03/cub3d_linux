@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/06 16:43:34 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/07 19:05:27 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_f
 	int b;
 }t_f;
 
+
 typedef struct s_map
 {
 	int		j;
@@ -90,6 +91,7 @@ typedef struct s_map
 	char	**maps;
 	char	*dst;
 	char	player;
+	char	wall_textures;
 	t_c		ceiling;
 	t_f		floor;
 }			t_map;
@@ -126,7 +128,10 @@ typedef struct s_game
 	void	*mlx;
 	void	*xpm;
 	void	*img;
-	t_imag	pimg;
+	t_imag	north;
+	t_imag	south;
+	t_imag	west;
+	t_imag	east;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -136,6 +141,7 @@ typedef struct s_game
 	double	projectedWallHeight;
 	int		hight;
 	int		chight;
+	int 	virti;
 	int		width;
 	int		cwidth;
 	char	**path;
@@ -195,5 +201,10 @@ void    shut_rays(t_game *game, t_map *map);
 void   render_3d(t_game *game, t_map *map);
 
 int	check_path(char *str,char *extension);
+void load_texture(void *mlx, char *path, t_imag img) ;
+void init_textures(t_game *game);
+int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp);
+unsigned int	get_pixel_img(t_imag img, int x, int y);
+
 
 # endif

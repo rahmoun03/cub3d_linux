@@ -1,38 +1,35 @@
 #include "../cub.h"
 
-void    black_screen(t_game *game)
+void init_textures(t_game *game) 
 {
-    int x = 0;
-    int y = 0;
-    while (y <= HEIGHT)
-    {
-        x = 0;
-        while (x <= WIDTH)
-        {
-            my_mlx_pixel_put(game, x, y, 0);
-            x++;
-        }
-        y++;
-    }
+    game->north.img = mlx_xpm_file_to_image(game->mlx, game->t_map->no, &game->north.weight, &game->north.height);
+    game->north.addr = mlx_get_data_addr(game->north.img, &game->north.bits_per_pixel, &game->north.line_length, &game->north.endian);
+//
+    game->south.img = mlx_xpm_file_to_image(game->mlx, game->t_map->so, &game->south.weight, &game->south.height);
+    game->south.addr = mlx_get_data_addr(game->south.img, &game->south.bits_per_pixel, &game->south.line_length, &game->south.endian);
+//
+    game->west.img = mlx_xpm_file_to_image(game->mlx, game->t_map->we, &game->west.weight, &game->west.height);
+    game->west.addr = mlx_get_data_addr(game->west.img, &game->west.bits_per_pixel, &game->west.line_length, &game->west.endian);
+//
+    game->east.img = mlx_xpm_file_to_image(game->mlx, game->t_map->ea, &game->east.weight, &game->east.height);
+    game->east.addr = mlx_get_data_addr(game->east.img, &game->east.bits_per_pixel, &game->east.line_length, &game->east.endian);
 }
 
-int check_color(t_game *game, int xp, int yp)
-{
-    // int ang = game->rotatangle * (180 / PI);
-    (void)yp;
-    (void)xp;
-    if (game->t_map->maps[yp / SIZE][((xp + 1)/ SIZE)] == '1') // limn
-        return 255; // ZRA9
-    else if (game->t_map->maps[((yp + 1)/ SIZE)][xp / SIZE] == '1') // lta7t
-        return 7925815; // LMCHA3CHA3
-    else if (game->t_map->maps[(yp) / SIZE][((xp - 1) / SIZE)] == '1') // lisr
-        return 16389175; // YAJORY
-    else if (game->t_map->maps[((yp - 1) / SIZE)][xp / SIZE] == '1') // lfo9
-        return 7864440; // MOVE
-    return 0;
-}
 
-// rgb = 65536 * r + 256 * g + b;
+
+
+int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp)
+{
+    if (game->t_map->maps[y_pos / SIZE][((x_pos + 1)/ SIZE)] == '1')// limn 
+        return get_pixel_img(game->east, xp, yp); 
+    else if (game->t_map->maps[((y_pos + 1)/ SIZE)][x_pos / SIZE] == '1') // lta7t 
+        return get_pixel_img(game->south, xp, yp);
+    else if (game->t_map->maps[(y_pos) / SIZE][((x_pos - 1) / SIZE)] == '1') // lisr 
+         return get_pixel_img(game->west, xp, yp);
+    else if (game->t_map->maps[((y_pos - 1) / SIZE)][x_pos / SIZE] == '1') // lfo9
+        return get_pixel_img(game->north, xp, yp);
+    return 255;
+}
 
 void    print_wall(t_game *game, int x_pos, int y_pos)
 {
@@ -46,11 +43,29 @@ void    print_wall(t_game *game, int x_pos, int y_pos)
         my_mlx_pixel_put(game, game->x, game->y, ceiling);
         game->y++;
     }
+    int	ofx = 0;
+    int	ofy = 0;
+	if (game->virti == 0)
+	{
+		ofx = fmod(x_pos, 64);
+		if (ofx >= 63 || ofx == 0)
+			ofx = fmod(y_pos, 64);
+	}
+	else if (game->virti == 1)
+    {
+		ofx = fmod(x_pos, 64);
+        if (ofx >= 63  || ofx == 0)
+			ofx = fmod(y_pos, 64);
+
+    }
     while (game->y <= bottom)
     {
-        my_mlx_pixel_put(game, game->x, game->y, check_color(game, x_pos, y_pos));
+        ofy = fmod(((game->y - (HEIGHT - game->projectedWallHeight) / 2) * 64) / game->projectedWallHeight,64);
+        if (check_color(game, x_pos, y_pos, ofx, ofy) != -16777216)
+            my_mlx_pixel_put(game, game->x, game->y, check_color(game, x_pos, y_pos, ofx, ofy));
         game->y++;
     }
+
     while (game->y < HEIGHT)
     {
         my_mlx_pixel_put(game, game->x, game->y, floor);
@@ -58,7 +73,6 @@ void    print_wall(t_game *game, int x_pos, int y_pos)
     }
     
 }
-
 
 int check_rays_2D(t_game *game, t_map *map, int pix, double x, double y)
 {
@@ -142,6 +156,10 @@ void   render_3d(t_game *game, t_map *map)
 			game->new_distance = game->distance * cos(PI - (angle));
 		game->distance = game->new_distance;
 		game->projectedWallHeight = (SIZE * WIDTH) / game->distance;
+        if (roundf(fmod(game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), 64)) == 0)
+		    game->virti = 0;
+	    else if (roundf(fmod(game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)), 64)) == 0)
+		    game->virti = 1;
 		print_wall(game, game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)));
 		game->rayangle += game->rotatspeed;
 		game->x++;

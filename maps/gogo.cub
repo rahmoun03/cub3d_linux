@@ -1,9 +1,9 @@
-NO ./path_to_the_north_texture.xpm
-SO ./texture/ground.xpm
-WE ./texture/wall.xpm
-EA ./path_to_the_east_texture.xpm
-F 130,119,23
-C 144,202,249
+NO texture/wall/north.xpm
+SO texture/wall/south.xpm
+WE texture/wall/weast.xpm
+EA texture/wall/east.xpm
+F 50,50,50
+C 21,13,60
 
 
 
