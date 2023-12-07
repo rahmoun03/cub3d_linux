@@ -132,8 +132,8 @@ void 	map_closed(t_map *map)
 
 void	flood_fill(t_ft *tmp, int i, int j)
 {
-	if (i < 0 || j < 0 || i > tmp->colum
-		|| tmp->maps[i][j] == '*')
+	if (i <= 0 || j <= 0 || i > tmp->colum
+		|| tmp->maps[i] != NULL || tmp->maps[i][j] == '*')
 		return ;
 
 	tmp->maps[i][j] = '*';

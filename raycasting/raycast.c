@@ -28,7 +28,7 @@ int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp)
          return get_pixel_img(game->west, xp, yp);
     else if (game->t_map->maps[((y_pos - 1) / SIZE)][x_pos / SIZE] == '1') // lfo9
         return get_pixel_img(game->north, xp, yp);
-    return 255;
+    return 0;
 }
 
 void    print_wall(t_game *game, int x_pos, int y_pos)
@@ -108,6 +108,10 @@ int check_rays_3D(t_game *game, t_map *map, int pix)
 	return (1);
 }
 
+void    shadow(t_game *game)
+{
+    
+}
 
 void    shut_rays(t_game *game, t_map *map)
 {
@@ -144,7 +148,7 @@ void   render_3d(t_game *game, t_map *map)
 	while (game->rayangle <= PI / 6 && game->x < WIDTH)
 	{
 		pix = 0.0;
-		while(check_rays_3D(game, map, pix))
+		while(pix < 800 && check_rays_3D(game, map, pix))
 		{
 			pix++;
 		}
