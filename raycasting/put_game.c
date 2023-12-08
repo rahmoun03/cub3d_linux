@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/07 18:51:52 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 13:54:37 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 
 	if ((x >= 0 && x <= WIDTH) && (y >= 0 && y <= HEIGHT))
 	{
-		dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel / 8));
+		dst = game->addr + ((y * game->line_length) + (x * (game->bits_per_pixel / 8)));
 		*(unsigned int*)dst = color;
 	}
 }
@@ -401,6 +401,7 @@ int update(t_game *game)
 		check_moves(game);
 		render_3d(game, game->t_map);
 		mini_map(game);
+		// shadow(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	}
 	return 0;

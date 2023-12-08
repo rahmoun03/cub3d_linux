@@ -16,8 +16,6 @@ void init_textures(t_game *game)
 }
 
 
-
-
 int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp)
 {
     if (game->t_map->maps[y_pos / SIZE][((x_pos + 1)/ SIZE)] == '1')// limn 
@@ -30,50 +28,6 @@ int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp)
         return get_pixel_img(game->north, xp, yp);
     return 0;
 }
-
-void    print_wall(t_game *game, int x_pos, int y_pos)
-{
-    int ceiling = (game->t_map->ceiling.r * 65536) + (game->t_map->ceiling.g * 256) + game->t_map->ceiling.b;
-    int floor = (game->t_map->floor.r * 65536) + (game->t_map->floor.g * 256) + game->t_map->floor.b;
-    int top = (HEIGHT / 2) - game->projectedWallHeight / 2;
-    int bottom = top + game->projectedWallHeight;
-    game->y = 0;
-    while (game->y < top)
-    {
-        my_mlx_pixel_put(game, game->x, game->y, ceiling);
-        game->y++;
-    }
-    int	ofx = 0;
-    int	ofy = 0;
-	if (game->virti == 0)
-	{
-		ofx = fmod(x_pos, 64);
-		if (ofx >= 63 || ofx == 0)
-			ofx = fmod(y_pos, 64);
-	}
-	else if (game->virti == 1)
-    {
-		ofx = fmod(x_pos, 64);
-        if (ofx >= 63  || ofx == 0)
-			ofx = fmod(y_pos, 64);
-
-    }
-    while (game->y <= bottom)
-    {
-        ofy = fmod(((game->y - (HEIGHT - game->projectedWallHeight) / 2) * 64) / game->projectedWallHeight,64);
-        if (check_color(game, x_pos, y_pos, ofx, ofy) != -16777216)
-            my_mlx_pixel_put(game, game->x, game->y, check_color(game, x_pos, y_pos, ofx, ofy));
-        game->y++;
-    }
-
-    while (game->y < HEIGHT)
-    {
-        my_mlx_pixel_put(game, game->x, game->y, floor);
-        game->y++;
-    }
-    
-}
-
 int check_rays_2D(t_game *game, t_map *map, int pix, double x, double y)
 {
 	if(map->maps[(int)((y + (sin(game->rotatangle + game->rayangle) * pix)) - 1) / 10]
@@ -108,9 +62,90 @@ int check_rays_3D(t_game *game, t_map *map, int pix)
 	return (1);
 }
 
-void    shadow(t_game *game)
+void    print_wall(t_game *game, int x_pos, int y_pos, int pix)
 {
-    
+    float dark = 1;
+    int ceiling = (game->t_map->ceiling.r << 16) + (game->t_map->ceiling.g << 8) + game->t_map->ceiling.b;
+    int floor = (game->t_map->floor.r << 16) + (game->t_map->floor.g << 8) + game->t_map->floor.b;
+    int top = (HEIGHT / 2) - game->projectedWallHeight / 2;
+    int bottom = top + game->projectedWallHeight;
+    game->y = 0;
+    while (game->y < top)
+    {
+        my_mlx_pixel_put(game, game->x, game->y, ceiling);
+        if(game->y + 150 >= HEIGHT / 2)
+        {
+            shadow(game, game->x, game->y, ceiling, dark);
+            if(dark > 0.05 && game->y % 4 == 0)
+                dark -= 0.05;
+        }
+        game->y++;
+    }
+    int	ofx = 0;
+    int	ofy = 0;
+    dark = 0.0;
+	if (game->virti == 0)
+	{
+		ofx = fmod(x_pos, SIZE);
+		if (ofx >= SIZE - 1 || ofx == 0)
+			ofx = fmod(y_pos, SIZE);
+	}
+	else if (game->virti == 1)
+    {
+		ofx = fmod(x_pos, SIZE);
+        if (ofx >= SIZE - 1  || ofx == 0)
+			ofx = fmod(y_pos, SIZE);
+
+    }
+    dark = 0.0;
+    while (game->y <= bottom)
+    {
+        ofy = fmod(((game->y - (HEIGHT - game->projectedWallHeight) / 2) * SIZE) / game->projectedWallHeight,SIZE);
+        int color = check_color(game, x_pos, y_pos, ofx, ofy);
+        if ( color != -16777216)
+            my_mlx_pixel_put(game, game->x, game->y, color);
+        if(pix > 900)
+            shadow(game, game->x, game->y, color, (10 - ((float)pix / 100)));
+        if(game->y > (HEIGHT / 2) + 40 && game->y < (HEIGHT / 2) + 300)
+        {
+            if(dark < 1 && game->y % 4 == 0)
+                dark += 0.03;
+        }
+        game->y++;
+    }
+    while (game->y < HEIGHT)
+    {
+        my_mlx_pixel_put(game, game->x, game->y, floor);
+        if(game->y > (HEIGHT / 2) + 30 && game->y < (HEIGHT / 2) + 300)
+        {
+            shadow(game, game->x, game->y, floor, dark);
+            if(dark < 1 && game->y % 4 == 0)
+                dark += 0.03;
+        }
+        game->y++;
+    }
+}
+
+
+void    shadow(t_game *game, int x, int y, int color, float darknessFactor)
+{
+    char *dst;
+
+    int pixel_index = (y * game->line_length) + (x * game->bits_per_pixel / 8);
+    int red = color >> 16 & 0xFF;  
+    int green = color >> 8 & 0xFF;
+    int blue = color & 0xFF;
+    red = (int)(red * darknessFactor);
+    green = (int)(green * darknessFactor);
+    blue = (int)(blue * darknessFactor);
+
+    dst = game->addr + pixel_index;
+    int darkenedColor = (red << 16) | (green << 8) | blue;
+
+    // printf("color = %d\n", darkenedColor);
+    // exit(0);
+    // if(*(unsigned int*)dst != 0)
+        *(unsigned int*)dst = darkenedColor;
 }
 
 void    shut_rays(t_game *game, t_map *map)
@@ -148,7 +183,7 @@ void   render_3d(t_game *game, t_map *map)
 	while (game->rayangle <= PI / 6 && game->x < WIDTH)
 	{
 		pix = 0.0;
-		while(pix < 800 && check_rays_3D(game, map, pix))
+		while(pix < 1000 && check_rays_3D(game, map, pix))
 		{
 			pix++;
 		}
@@ -160,11 +195,11 @@ void   render_3d(t_game *game, t_map *map)
 			game->new_distance = game->distance * cos(PI - (angle));
 		game->distance = game->new_distance;
 		game->projectedWallHeight = (SIZE * WIDTH) / game->distance;
-        if (roundf(fmod(game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), 64)) == 0)
+        if (roundf(fmod(game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), SIZE)) == 0)
 		    game->virti = 0;
-	    else if (roundf(fmod(game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)), 64)) == 0)
+	    else if (roundf(fmod(game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)), SIZE)) == 0)
 		    game->virti = 1;
-		print_wall(game, game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)));
+		print_wall(game, game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)), pix);
 		game->rayangle += game->rotatspeed;
 		game->x++;
 	}

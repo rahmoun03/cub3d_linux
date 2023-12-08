@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/07 19:05:27 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 13:55:17 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ void init_textures(t_game *game);
 int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp);
 unsigned int	get_pixel_img(t_imag img, int x, int y);
 
+void    shadow(t_game *game, int x, int y, int color, float darknessFactor);
 
 # endif
