@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 09:48:30 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/08 13:54:37 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 21:22:42 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,7 @@ void	draw_start(t_game *game)
 	else
 	{
 		if(game->t_map->l++ > 10000)
-		{
 			game->start = -1;
-		}
 	}
 }
 
@@ -279,7 +277,7 @@ void mini_ground(t_game *game)
 
 void	mini_wall_1(t_game *game)
 {
-	int x = 0;
+	int x ;
 	int y = MINI_HEIGHT / 2;
 	float xp;
 	float yp = ((float)game->yplayer / SIZE) * 10;

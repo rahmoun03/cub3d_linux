@@ -4,13 +4,10 @@ void init_textures(t_game *game)
 {
     game->north.img = mlx_xpm_file_to_image(game->mlx, game->t_map->no, &game->north.weight, &game->north.height);
     game->north.addr = mlx_get_data_addr(game->north.img, &game->north.bits_per_pixel, &game->north.line_length, &game->north.endian);
-//
     game->south.img = mlx_xpm_file_to_image(game->mlx, game->t_map->so, &game->south.weight, &game->south.height);
     game->south.addr = mlx_get_data_addr(game->south.img, &game->south.bits_per_pixel, &game->south.line_length, &game->south.endian);
-//
     game->west.img = mlx_xpm_file_to_image(game->mlx, game->t_map->we, &game->west.weight, &game->west.height);
     game->west.addr = mlx_get_data_addr(game->west.img, &game->west.bits_per_pixel, &game->west.line_length, &game->west.endian);
-//
     game->east.img = mlx_xpm_file_to_image(game->mlx, game->t_map->ea, &game->east.weight, &game->east.height);
     game->east.addr = mlx_get_data_addr(game->east.img, &game->east.bits_per_pixel, &game->east.line_length, &game->east.endian);
 }
@@ -28,6 +25,7 @@ int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp)
         return get_pixel_img(game->north, xp, yp);
     return 0;
 }
+
 int check_rays_2D(t_game *game, t_map *map, int pix, double x, double y)
 {
 	if(map->maps[(int)((y + (sin(game->rotatangle + game->rayangle) * pix)) - 1) / 10]
@@ -70,6 +68,8 @@ void    print_wall(t_game *game, int x_pos, int y_pos, int pix)
     int top = (HEIGHT / 2) - game->projectedWallHeight / 2;
     int bottom = top + game->projectedWallHeight;
     game->y = 0;
+    int	ofx = 0;
+    int	ofy = 0;
     while (game->y < top)
     {
         my_mlx_pixel_put(game, game->x, game->y, ceiling);
@@ -81,8 +81,6 @@ void    print_wall(t_game *game, int x_pos, int y_pos, int pix)
         }
         game->y++;
     }
-    int	ofx = 0;
-    int	ofy = 0;
     dark = 0.0;
 	if (game->virti == 0)
 	{
@@ -134,7 +132,7 @@ void    shadow(t_game *game, int x, int y, int color, float darknessFactor)
     char *dst;
 
     int pixel_index = (y * game->line_length) + (x * game->bits_per_pixel / 8);
-    int red = color >> 16 & 0xFF;  
+    int red = color >> 16 & 0xFF;
     int green = color >> 8 & 0xFF;
     int blue = color & 0xFF;
     red = (int)(red * darknessFactor);
@@ -143,11 +141,7 @@ void    shadow(t_game *game, int x, int y, int color, float darknessFactor)
 
     dst = game->addr + pixel_index;
     int darkenedColor = (red << 16) | (green << 8) | blue;
-
-    // printf("color = %d\n", darkenedColor);
-    // exit(0);
-    // if(*(unsigned int*)dst != 0)
-        *(unsigned int*)dst = darkenedColor;
+    *(unsigned int*)dst = darkenedColor;
 }
 
 void    shut_rays(t_game *game, t_map *map)
@@ -175,6 +169,20 @@ void    shut_rays(t_game *game, t_map *map)
     }
 }
 
+void init_distence(t_game *game, int pix)
+{
+    double angle;
+
+    angle  = fabs(game->rayangle);
+    game->distance = pix;
+    if ((game->rayangle) < PI / 2)
+        game->new_distance = game->distance * cos(angle);
+    else
+        game->new_distance = game->distance * cos(PI - (angle));
+    game->distance = game->new_distance;
+    game->projectedWallHeight = (SIZE * WIDTH) / game->distance;
+}
+
 void   render_3d(t_game *game, t_map *map)
 {
 	game->distance = 0;
@@ -186,17 +194,8 @@ void   render_3d(t_game *game, t_map *map)
 	{
 		pix = 0.0;
 		while(pix < 1000 && check_rays_3D(game, map, pix))
-		{
 			pix++;
-		}
-		game->distance = pix;
-		double angle = fabs(game->rayangle);
-		if ((game->rayangle) < PI / 2)
-			game->new_distance = game->distance * cos(angle);
-		else
-			game->new_distance = game->distance * cos(PI - (angle));
-		game->distance = game->new_distance;
-		game->projectedWallHeight = (SIZE * WIDTH) / game->distance;
+        init_distence(game, pix);
         if (roundf(fmod(game->xplayer + (cos(game->rotatangle + game->rayangle) * (pix)), SIZE)) == 0)
 		    game->virti = 0;
 	    else if (roundf(fmod(game->yplayer + (sin(game->rotatangle + game->rayangle) * (pix)), SIZE)) == 0)

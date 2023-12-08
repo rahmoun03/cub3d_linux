@@ -2,8 +2,8 @@ NO ./path_to_the_north_texture.xpm
 SO ./texture/ground.xpm
 WE ./texture/wall.xpm
 EA ./path_to_the_east_texture.xpm
-F 130,119,23
-C 144,202,249
+F 25,22,2
+C 10,10,50
 
 
 
