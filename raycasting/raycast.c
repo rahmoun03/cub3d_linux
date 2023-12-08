@@ -121,6 +121,8 @@ void    print_wall(t_game *game, int x_pos, int y_pos, int pix)
             shadow(game, game->x, game->y, floor, dark);
             if(dark < 1 && game->y % 4 == 0)
                 dark += 0.03;
+            if(dark > 1)
+                dark = 1;
         }
         game->y++;
     }

@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/03 17:41:01 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:13:18 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,12 @@ int	main(int ac, char **av)
 		init_t_map(ptr);
         printf("%svalid \n%s" , GREEN, DEFFAULT);
 		read_file(ptr, fd);
-		printf("\n\n\n\n\n%s\n", ptr->no);
-		printf("\n%s\n", ptr->so);
-		printf("\n%s\n", ptr->we);
-		printf("\n%s\n", ptr->ea);
-		printf("\n%s\n", ptr->f);
-		printf("\n%s\n", ptr->c);
-		ptr->maps = ft_split((ptr->map) + ptr->i, '\n');
-
+		// printf("\n\n\n\n\n%s\n", ptr->no);
+		// printf("\n%s\n", ptr->so);
+		// printf("\n%s\n", ptr->we);
+		// printf("\n%s\n", ptr->ea);
+		// printf("\n%s\n", ptr->f);
+		// printf("\n%s\n", ptr->c);
 		start_mlx(game);
 	}
 }

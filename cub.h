@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/08 13:55:17 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:12:06 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,13 @@ typedef struct s_map
 	char	*map;
 	char	**maps;
 	char	*dst;
+	int		nord;
+	int		sud;
+	int		ouest;
+	int		east;
 	char	player;
+	int		width;
+	int		height;
 	char	wall_textures;
 	t_c		ceiling;
 	t_f		floor;
@@ -158,10 +164,30 @@ int		ft_is_digit(int c);
 void	check_element(t_map *map);
 void	check_map(t_map *map);
 void	check_c_f(t_map *map);
-void 	map_closed(t_map *map);
+void	c_f_end(t_map *map);
+void	c_f_first(char **numbers);
+void	map_closed(t_map *map);
 void	flood_fill(t_ft *tmp, int i, int j);
 int	ft_len(char *str);
 int	ft_wc_l(char **str);
+void	check_element_count(char **numbers);
+void check_number_string(char *number) ;
+void validate_character(char *number, int *j, int *last_digit);
+void handle_error(char c);
+void	validate_map_character(t_map *map, int *player, int *i);
+void	check_single_player(int player);
+int	check_commas(const char *str, int start, int end);
+void	check_map(t_map *map);
+char	*set_path(t_map *map, char *str);
+int	set_texture_path(t_map *map, char *str, char *texture_id,
+		char **texture_path);
+int	check_texture(t_map *map, char *str);
+void set_path_with_check(t_map *map, char *str, int start, int end, char type);
+void	check_and_set(t_map *map, char *str);
+void	map_closed(t_map *map);
+t_ft	*init_and_fill(t_map *map);
+void	check_map_and_cleanup(t_map *map, t_ft *tmp);
+int	element_is_full(t_map *map);
 
 
 
@@ -205,7 +231,20 @@ void load_texture(void *mlx, char *path, t_imag img) ;
 void init_textures(t_game *game);
 int check_color(t_game *game, int x_pos, int y_pos ,int xp, int yp);
 unsigned int	get_pixel_img(t_imag img, int x, int y);
+void	check_if_cub_file_is_empty(t_map *map);
+void	double_nl(t_map *map);
+void	wc_space(t_map *map, char **str);
+void	check_path_texture(t_map *map);
+void	ft_free_tmp(char **tmp);
 
+void	check_wall_line(char *line, int width, char *error_message);
+void	check_side_walls(char **lines, int height, char *error_message);
+void	check_walls(t_map *map);
+void	ft_free_tmp_g(char **tmp);
+int	item_chr(char *s, char c);
+int	ft_len(char *str);
+int	ft_iss_digit(char c);
+void	flood_fill(t_ft *tmp, int i, int j);
 void    shadow(t_game *game, int x, int y, int color, float darknessFactor);
 
 # endif

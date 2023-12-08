@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 12:53:26 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/20 15:42:02 by arahmoun         ###   ########.fr       */
+/*   Created: 2023/12/08 13:44:03 by bel-kase          #+#    #+#             */
+/*   Updated: 2023/12/08 13:44:04 by bel-kase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int ft_is_digit(int c)
+int	ft_is_digit(int c)
 {
-    if(c >= '0' && c <= '9')
-        return (1);
-    return (0);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

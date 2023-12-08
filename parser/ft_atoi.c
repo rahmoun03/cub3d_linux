@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 01:00:07 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/20 15:42:22 by arahmoun         ###   ########.fr       */
+/*   Created: 2023/12/08 13:45:22 by bel-kase          #+#    #+#             */
+/*   Updated: 2023/12/08 13:46:51 by bel-kase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ static void	ft_sing(char c, int *sing, unsigned long *i)
 
 int	ft_atoi(char *str)
 {
-	unsigned long	i;
-	int				sing;
-	unsigned long	val;
+	unsigned long i;
+	int sing;
+	unsigned long val;
 
 	sing = 1;
 	i = 0;
 	val = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-		|| '\v' == str[i] || str[i] == '\r' || str[i] == '\f')
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || '\v' == str[i]
+		|| str[i] == '\r' || str[i] == '\f')
 		i++;
 	ft_sing(str[i], &sing, &i);
 	while (str[i] <= '9' && str[i] >= '0' && str[i])
