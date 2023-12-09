@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:08:17 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/11/21 05:24:19 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:01:08 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	if (!str)
-        exit(0);
+		exit(0);
 	while (str[i] != '\0')
 		i++;
 	return (i);

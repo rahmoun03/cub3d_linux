@@ -6,11 +6,11 @@
 #    By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 12:53:19 by arahmoun          #+#    #+#              #
-#    Updated: 2023/12/08 19:12:41 by arahmoun         ###   ########.fr        #
+#    Updated: 2023/12/09 14:39:53 by arahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub
+NAME = cub3d
 
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c 
 
@@ -35,7 +35,7 @@ ${NAME}: ${SRCS}
 	@tput setaf 2; echo "THE GAME IS READY"
 
 clean:
-	@rm -rf cub
+	@rm -rf $(NAME)
 	@tput setaf 1; echo "CLEAN COMPLET"
 
 fclean: clean

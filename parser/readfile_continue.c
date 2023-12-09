@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:47:05 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/09 08:48:53 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 09:20:27 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,32 +73,16 @@ void	check_path_texture(t_map *map)
 {
 	map->nord = open(map->no, O_RDWR);
 	if (map->nord < 0)
-	{
-		close(map->nord);
-		printf("Error : texture path is invalid (%s)\n", map->no);
-		exit(0);
-	}
+		error_texture(map->no, map->nord);
 	map->sud = open(map->so, O_RDWR);
 	if (map->sud < 0)
-	{
-		close(map->sud);
-		printf("Error : texture path is invalid (%s)\n", map->so);
-		exit(0);
-	}
+		error_texture(map->so, map->sud);
 	map->ouest = open(map->we, O_RDWR);
 	if (map->ouest < 0)
-	{
-		close(map->ouest);
-		printf("Error : texture path is invalid (%s)\n", map->we);
-		exit(0);
-	}
+		error_texture(map->we, map->ouest);
 	map->east = open(map->ea, O_RDWR);
 	if (map->east < 0)
-	{
-		close(map->east);
-		printf("Error : texture path is invalid (%s)\n", map->ea);
-		exit(0);
-	}
+		error_texture(map->ea, map->east);
 }
 
 void	ft_free_tmp(char **tmp)

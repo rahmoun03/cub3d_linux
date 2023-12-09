@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:47:05 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/08 21:12:15 by bel-kase         ###   ########.fr       */
+/*   Updated: 2023/12/09 10:18:03 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ t_ft	*init_and_fill(t_map *map)
 	wc_space(map, tmp->maps);
 	tmp->spaces = map->spaces;
 	while (tmp->maps[tmp->i] && tmp->j == -1)
-		tmp->j = item_chr(tmp->maps[tmp->i++], map->player);
+	{
+		tmp->j = item_chr(tmp->maps[tmp->i], map->player);
+		tmp->i++;
+	}
 	tmp->i--;
 	flood_fill(tmp, tmp->i, tmp->j);
 	return (tmp);

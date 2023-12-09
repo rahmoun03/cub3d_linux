@@ -6,18 +6,17 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/08 19:13:18 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:02:15 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-
-int	check_path(char *str,char *extension)
+int	check_path(char *str, char *extension)
 {
-	int		i;
-	int		j;
-	char	*cub;
+	int i;
+	int j;
+	char *cub;
 
 	j = 0;
 	cub = ft_strdup(extension);
@@ -56,12 +55,11 @@ void init_t_map(t_map *ptr)
 	ptr->floor.numbers = NULL;
 }
 
-
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	int		fd;
-	t_map	*ptr;
-	t_game	*game;
+	int fd;
+	t_map *ptr;
+	t_game *game;
 
 	ptr = (t_map *)malloc(sizeof(t_map));
 	game = (t_game *)malloc(sizeof(t_game));
@@ -72,10 +70,10 @@ int	main(int ac, char **av)
 		printf("Error\n%sinvalid path\n%s ", RED, DEFFAULT);
 		return (0);
 	}
-    else
+	else
 	{
 		init_t_map(ptr);
-        printf("%svalid \n%s" , GREEN, DEFFAULT);
+		printf("%svalid \n%s", GREEN, DEFFAULT);
 		read_file(ptr, fd);
 		// printf("\n\n\n\n\n%s\n", ptr->no);
 		// printf("\n%s\n", ptr->so);
