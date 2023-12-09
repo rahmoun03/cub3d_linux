@@ -6,7 +6,7 @@
 /*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:47:05 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/08 14:56:11 by bel-kase         ###   ########.fr       */
+/*   Updated: 2023/12/08 21:12:15 by bel-kase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void	check_map_and_cleanup(t_map *map, t_ft *tmp)
 
 	i = 0;
 	wc_space(map, tmp->maps);
-	check_walls(map);
 	if (tmp->spaces != map->spaces)
 	{
 		printf("Error map_closed()\n");
 		exit(0);
 	}
+	check_walls(map);
 	while (tmp->maps[i])
 	{
 		printf("%s\n", tmp->maps[i]);
@@ -104,7 +104,7 @@ void	check_element(t_map *map)
 		else
 		{
 			printf("Error : check_element(%d) = %c\n", map->i,
-					map->map[map->i]);
+				map->map[map->i]);
 			exit(1);
 		}
 		map->i++;

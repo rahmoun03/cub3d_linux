@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readfile_continue3.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 21:06:27 by bel-kase          #+#    #+#             */
+/*   Updated: 2023/12/08 21:22:33 by bel-kase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../cub.h"
 
@@ -45,12 +56,10 @@ void	check_c_f(t_map *map)
 {
 	map->ceiling.numbers = ft_split(map->c, ',');
 	map->floor.numbers = ft_split(map->f, ',');
-	// ceiling
 	c_f_first(map->ceiling.numbers);
 	map->ceiling.r = ft_atoi(map->ceiling.numbers[0]);
 	map->ceiling.g = ft_atoi(map->ceiling.numbers[1]);
 	map->ceiling.b = ft_atoi(map->ceiling.numbers[2]);
-	// floor
 	c_f_first(map->floor.numbers);
 	map->floor.r = ft_atoi(map->floor.numbers[0]);
 	map->floor.g = ft_atoi(map->floor.numbers[1]);

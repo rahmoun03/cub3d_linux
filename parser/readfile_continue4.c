@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readfile_continue4.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 21:07:04 by bel-kase          #+#    #+#             */
+/*   Updated: 2023/12/08 21:36:08 by bel-kase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
 void	check_element_count(char **numbers)
@@ -13,9 +25,10 @@ void	check_element_count(char **numbers)
 		exit(0);
 	}
 }
+
 void	c_f_first(char **numbers)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (numbers[i])
@@ -26,37 +39,40 @@ void	c_f_first(char **numbers)
 	check_element_count(numbers);
 }
 
-void handle_error(char c) 
+void	handle_error(char c)
 {
-    printf("Error : c_f_first(non-digit character '%c')\n", c);
-    exit(0);
+	printf("Error : c_f_first(non-digit character '%c')\n", c);
+	exit(0);
 }
 
-void validate_character(char *number, int *j, int *last_digit) 
+void	validate_character(char *number, int *j, int *last_digit)
 {
-    if (ft_iss_digit(number[*j])) 
+	if (ft_iss_digit(number[*j]))
 	{
-        *last_digit = 1;
-        (*j)++;
-    } 
-	else if (number[*j] == ' ') 
+		*last_digit = 1;
+		(*j)++;
+	}
+	else if (number[*j] == ' ')
 	{
-        if (*last_digit && number[*j + 1] != '\0' && ft_iss_digit(number[*j + 1])) 
+		if (*last_digit && number[*j + 1] != '\0' && ft_iss_digit(number[*j
+					+ 1]))
 		{
-            printf("Error Space inside a number in '%s'\n", number);
-            exit(0);
-        }
-        (*j)++;
-    } 
-	else 
-        handle_error(number[*j]);
+			printf("Error Space inside a number in '%s'\n", number);
+			exit(0);
+		}
+		(*j)++;
+	}
+	else
+		handle_error(number[*j]);
 }
 
-void check_number_string(char *number) 
+void	check_number_string(char *number)
 {
-    int j = 0;
-    int last_digit = 0;
+	int		j;
+	int		last_digit;
 
-    while (number[j])
-        validate_character(number, &j, &last_digit);
+	j = 0;
+	last_digit = 0;
+	while (number[j])
+		validate_character(number, &j, &last_digit);
 }

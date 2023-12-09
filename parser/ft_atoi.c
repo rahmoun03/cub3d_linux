@@ -6,7 +6,7 @@
 /*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:45:22 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/08 13:46:51 by bel-kase         ###   ########.fr       */
+/*   Updated: 2023/12/08 21:10:22 by bel-kase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	ft_sing(char c, int *sing, unsigned long *i)
 
 int	ft_atoi(char *str)
 {
-	unsigned long i;
-	int sing;
-	unsigned long val;
+	unsigned long	i;
+	int				sing;
+	unsigned long	val;
 
 	sing = 1;
 	i = 0;

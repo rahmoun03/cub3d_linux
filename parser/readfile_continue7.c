@@ -1,10 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readfile_continue7.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 21:08:42 by bel-kase          #+#    #+#             */
+/*   Updated: 2023/12/09 08:50:22 by arahmoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
-
-void	set_path_with_check(t_map *map, char *str, int start, int end,
-		char type)
+void	set_path_with_check(t_map *map, char *str, char type)
 {
-	if (!check_commas(str, start, end))
+	if (!check_commas(str, map->i))
 	{
 		printf("Erreur: Nombre incorrect de virgules pour '%c'\n", type);
 		exit(0);
@@ -16,37 +26,32 @@ void	set_path_with_check(t_map *map, char *str, int start, int end,
 		map->f = set_path(map, str);
 }
 
-void check_and_set(t_map *map, char *str) 
+void	check_and_set(t_map *map, char *str)
 {
-    int start, end;
-
-    if (!check_texture(map, str)) 
-    {
-        start = map->i;
-        end = start;
-        while (str[end] != '\0' && str[end] != '\n')
-            end++;
-
-        if (str[map->i] == 'C' && (str[map->i + 1] == ' ' || str[map->i + 1] == '\t')) 
-            set_path_with_check(map, str, start, end, 'C');
-        else if (str[map->i] == 'F' && (str[map->i + 1] == ' ' || str[map->i + 1] == '\t')) 
-            set_path_with_check(map, str, start, end, 'F');
-        else 
-        {
-            printf("Erreur : check_and_set()\n");
-            exit(0);
-        }
-    }
+	if (!check_texture(map, str))
+	{
+		if (str[map->i] == 'C' && (str[map->i + 1] == ' ' || str[map->i
+					+ 1] == '\t') && !map->c)
+			set_path_with_check(map, str, 'C');
+		else if (str[map->i] == 'F' && (str[map->i + 1] == ' ' || str[map->i
+					+ 1] == '\t') && !map->f)
+			set_path_with_check(map, str, 'F');
+		else
+		{
+			printf("Erreur : check_and_set()\n");
+			exit(0);
+		}
+	}
 }
 
-int	check_commas(const char *str, int start, int end)
+int	check_commas(const char *str, int start)
 {
 	int	count;
 	int	i;
 
 	count = 0;
 	i = start;
-	while (i < end)
+	while (str[i] && str[i] != '\n')
 	{
 		if (str[i] == ',')
 			count++;

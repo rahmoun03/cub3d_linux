@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readfile.c                                         :+:      :+:    :+:   */
+/*   readfile_continue.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:47:05 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/08 14:56:11 by bel-kase         ###   ########.fr       */
+/*   Updated: 2023/12/09 08:48:53 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../cub.h"
 
 void	check_if_cub_file_is_empty(t_map *map)
@@ -39,7 +40,7 @@ void	double_nl(t_map *map)
 	while (map->map[i])
 	{
 		if (map->map[i] == '\n' && map->map[map->i + 1] && map->map[i
-			+ 1] == '\n')
+				+ 1] == '\n')
 		{
 			printf("Error : double_nl()\n");
 			exit(1);
@@ -73,24 +74,28 @@ void	check_path_texture(t_map *map)
 	map->nord = open(map->no, O_RDWR);
 	if (map->nord < 0)
 	{
+		close(map->nord);
 		printf("Error : texture path is invalid (%s)\n", map->no);
 		exit(0);
 	}
 	map->sud = open(map->so, O_RDWR);
 	if (map->sud < 0)
 	{
+		close(map->sud);
 		printf("Error : texture path is invalid (%s)\n", map->so);
 		exit(0);
 	}
 	map->ouest = open(map->we, O_RDWR);
 	if (map->ouest < 0)
 	{
+		close(map->ouest);
 		printf("Error : texture path is invalid (%s)\n", map->we);
 		exit(0);
 	}
 	map->east = open(map->ea, O_RDWR);
 	if (map->east < 0)
 	{
+		close(map->east);
 		printf("Error : texture path is invalid (%s)\n", map->ea);
 		exit(0);
 	}
@@ -98,7 +103,7 @@ void	check_path_texture(t_map *map)
 
 void	ft_free_tmp(char **tmp)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (tmp[i])

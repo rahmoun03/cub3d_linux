@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readfile_continue2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 21:21:27 by bel-kase          #+#    #+#             */
+/*   Updated: 2023/12/08 21:21:55 by bel-kase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
 void	ft_free_tmp_g(char **tmp)
@@ -22,7 +34,7 @@ void	check_wall_line(char *line, int width, char *error_message)
 	i = 0;
 	while (i < width)
 	{
-		if (line[i] == '0')
+		if (line[i] != '1' && line[i] != ' ')
 		{
 			printf("%s\n", error_message);
 			exit(1);
@@ -40,7 +52,8 @@ void	check_side_walls(char **lines, int height, char *error_message)
 	while (i < height)
 	{
 		width = ft_len(lines[i]);
-		if (lines[i][0] == '0' || lines[i][width - 1] == '0')
+		if ((lines[i][0] != '1' && lines[i][width - 1] != '1')
+				&& lines[i][0] != ' ' && lines[i][width - 1] != ' ')
 		{
 			printf("%s\n", error_message);
 			exit(1);
@@ -51,23 +64,19 @@ void	check_side_walls(char **lines, int height, char *error_message)
 
 void	check_walls(t_map *map)
 {
-	char	**lines;
 	int		height;
 
-	lines = ft_split((map->map) + map->i, '\n');
-	height = ft_wc_l(lines);
-	check_wall_line(lines[0], ft_len(lines[0]),
+	height = ft_wc_l(map->maps);
+	check_wall_line(map->maps[0], ft_len(map->maps[0]),
 		"Error: Maps n'est pas entoure de (1)");
-	check_wall_line(lines[height - 1], ft_len(lines[height - 1]),
+	check_wall_line(map->maps[height - 1], ft_len(map->maps[height - 1]),
 		"Error: Maps n'est pas entoure de (1)");
-	check_side_walls(lines, height,
-		"Error: Maps n'est pas entoure de (1)");
-	ft_free_tmp_g(lines);
+	check_side_walls(map->maps, height, "Error: Maps n'est pas entoure de (1)");
 }
 
 int	item_chr(char *s, char c)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (s[i] != '\0' && c != s[i])

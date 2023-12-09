@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/08 19:12:06 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 22:29:17 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,13 +176,13 @@ void validate_character(char *number, int *j, int *last_digit);
 void handle_error(char c);
 void	validate_map_character(t_map *map, int *player, int *i);
 void	check_single_player(int player);
-int	check_commas(const char *str, int start, int end);
+int	check_commas(const char *str, int start);
 void	check_map(t_map *map);
 char	*set_path(t_map *map, char *str);
 int	set_texture_path(t_map *map, char *str, char *texture_id,
 		char **texture_path);
 int	check_texture(t_map *map, char *str);
-void set_path_with_check(t_map *map, char *str, int start, int end, char type);
+void set_path_with_check(t_map *map, char *str, char type);
 void	check_and_set(t_map *map, char *str);
 void	map_closed(t_map *map);
 t_ft	*init_and_fill(t_map *map);
@@ -214,13 +214,8 @@ void    ft_rotat_lift(t_game *game);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	mlx_put_squar(t_game *game, int color);
 
-
-
 void	cub_3d(t_game *game);
 void	cub_2d(t_game *game);
-
-
-
 
 void    black_screen(t_game *game);
 void    shut_rays(t_game *game, t_map *map);
