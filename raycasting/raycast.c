@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:11:09 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 16:57:24 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:13:55 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	set_texture(t_game *game, int x_pos, int y_pos, t_wall wall)
 {
 	int	num;
 
-	num = ((game->y - (HEIGHT - game->projectedWallHeight) / 2) * SIZE);
-	wall.ofy = fmod(num / game->projectedWallHeight, SIZE);
+	num = ((game->y - (HEIGHT - game->projectedwallheight) / 2) * SIZE);
+	wall.ofy = fmod(num / game->projectedwallheight, SIZE);
 	wall.color = check_color(game, x_pos, y_pos, wall);
 	if (game->distance > 900)
 		shadow(game, wall.color,

@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:54:50 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 16:56:02 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:15:00 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	print_wall(t_game *game, int x_pos, int y_pos)
 	wall.floor = (game->t_map->floor.r << 16) + \
 				(game->t_map->floor.g << 8) + \
 				game->t_map->floor.b;
-	wall.top = (HEIGHT / 2) - game->projectedWallHeight / 2;
-	wall.bottom = wall.top + game->projectedWallHeight;
+	wall.top = (HEIGHT / 2) - game->projectedwallheight / 2;
+	wall.bottom = wall.top + game->projectedwallheight;
 	wall.ofy = 0;
 	wall.ofx = 0;
 	game->dark = 1;
@@ -51,8 +51,8 @@ void	shadow(t_game *game, int color, float darknessFactor)
 	sh.green = (int)(sh.green * darknessFactor);
 	sh.blue = (int)(sh.blue * darknessFactor);
 	sh.dst = game->addr + sh.pixel_index;
-	sh.darkenedColor = (sh.red << 16) | (sh.green << 8) | sh.blue;
-	*(unsigned int *)sh.dst = sh.darkenedColor;
+	sh.darkenedcolor = (sh.red << 16) | (sh.green << 8) | sh.blue;
+	*(unsigned int *)sh.dst = sh.darkenedcolor;
 }
 
 void	shut_rays(t_game *game)
@@ -92,7 +92,7 @@ void	init_distence(t_game *game, int pix)
 		game->new_distance = game->distance * cos(angle);
 	else
 		game->new_distance = game->distance * cos(PI - (angle));
-	game->projectedWallHeight = (SIZE * WIDTH) / game->new_distance;
+	game->projectedwallheight = (SIZE * WIDTH) / game->new_distance;
 }
 
 void	render_3d(t_game *game, t_map *map)

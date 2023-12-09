@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 17:02:15 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:15:59 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_path(char *str, char *extension)
 {
-	int i;
-	int j;
-	char *cub;
+	int		i;
+	int		j;
+	char	*cub;
 
 	j = 0;
 	cub = ft_strdup(extension);
@@ -40,7 +40,7 @@ int	check_path(char *str, char *extension)
 	return (0);
 }
 
-void init_t_map(t_map *ptr)
+void	init_t_map(t_map *ptr)
 {
 	ptr->no = NULL;
 	ptr->so = NULL;
@@ -55,11 +55,11 @@ void init_t_map(t_map *ptr)
 	ptr->floor.numbers = NULL;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int fd;
-	t_map *ptr;
-	t_game *game;
+	int		fd;
+	t_map	*ptr;
+	t_game	*game;
 
 	ptr = (t_map *)malloc(sizeof(t_map));
 	game = (t_game *)malloc(sizeof(t_game));
@@ -67,6 +67,8 @@ int main(int ac, char **av)
 	fd = open(av[1], O_RDWR);
 	if (ac != 2 || fd == -1 || !check_path(av[1], ".cub"))
 	{
+		free(ptr);
+		free(game);
 		printf("Error\n%sinvalid path\n%s ", RED, DEFFAULT);
 		return (0);
 	}
@@ -75,12 +77,6 @@ int main(int ac, char **av)
 		init_t_map(ptr);
 		printf("%svalid \n%s", GREEN, DEFFAULT);
 		read_file(ptr, fd);
-		// printf("\n\n\n\n\n%s\n", ptr->no);
-		// printf("\n%s\n", ptr->so);
-		// printf("\n%s\n", ptr->we);
-		// printf("\n%s\n", ptr->ea);
-		// printf("\n%s\n", ptr->f);
-		// printf("\n%s\n", ptr->c);
 		start_mlx(game);
 	}
 }
