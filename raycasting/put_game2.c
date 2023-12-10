@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:00:28 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 17:43:32 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:58:42 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	ft_exit(int key, t_game *game)
 {
-	if (game->win)
-		exit(0);
+	(void)game;
+	printf("%s ______ YOU EXIT THE GAME _____ %s", "\033[7m\033[33m",
+		"\033[0m");
+	exit(0);
 	return (key);
 }
 
