@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:44:03 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/10 01:37:47 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:24:41 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,27 @@ void	error_texture(char *str, int fd)
 	exit(0);
 }
 
+int	check_zero(char *str, int j)
+{
+	while (str[j])
+	{
+		if (str[j] == '0')
+			return (0);
+		j++;
+	}
+	return (1);
+}
+
 void	flood_fill(t_ft *tmp, int i, int j)
 {
 	if (i < 0 || j < 0 || i >= tmp->colum
 		|| j >= ft_len(tmp->maps[i]) || tmp->maps[i][j] == '*')
 		return ;
+	if (tmp->maps[i][j] == '0' || tmp->maps[i][j] == tmp->player)
+	{
+		printf("Error : not close !");
+		exit(0);
+	}
 	tmp->maps[i][j] = '*';
 	if (tmp->maps[i] && (j < ft_len(tmp->maps[i]))
 		&& tmp->maps[i][j + 1]

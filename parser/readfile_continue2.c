@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readfile_continue2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-kase <bel-kase@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 21:21:27 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/08 21:21:55 by bel-kase         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:18:35 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ void	check_side_walls(char **lines, int height, char *error_message)
 		width = ft_len(lines[i]);
 		if ((lines[i][0] != '1' && lines[i][width - 1] != '1')
 				&& lines[i][0] != ' ' && lines[i][width - 1] != ' ')
+		{
+			printf("%s\n", error_message);
+			exit(1);
+		}
+		if ((i - 1 >= 0 && ft_len(lines[i - 1]) > width
+				&& !check_zero(lines[i - 1], width))
+			|| (i + 1 < height && ft_len(lines[i + 1]) > width
+				&& !check_zero(lines[i + 1], width)))
 		{
 			printf("%s\n", error_message);
 			exit(1);

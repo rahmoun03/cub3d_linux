@@ -1,10 +1,9 @@
 NO texture/wall/north.xpm
-SO texture/wall/south.xpm
-WE texture/wall/bricks.xpm
+SO texture/wall/13.xpm
+WE texture/wall/12.xpm
 EA texture/wall/east.xpm
-
-F 25,22,2
-C 10,10,50
+F 50,50,40
+C 10,10,70
 
 
                                                         111111

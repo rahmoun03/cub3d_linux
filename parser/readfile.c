@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:47:05 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/09 10:18:03 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:16:31 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,16 @@ t_ft	*init_and_fill(t_map *map)
 	tmp = (t_ft *)malloc(sizeof(t_ft));
 	tmp->i = 0;
 	tmp->j = -1;
+	tmp->player = map->player;
 	tmp->maps = ft_split((map->map) + map->i, '\n');
 	tmp->colum = ft_wc_l(tmp->maps);
-	wc_space(map, tmp->maps);
-	tmp->spaces = map->spaces;
-	while (tmp->maps[tmp->i] && tmp->j == -1)
+	while (tmp->maps[tmp->i])
 	{
-		tmp->j = item_chr(tmp->maps[tmp->i], map->player);
+		tmp->j = item_chr(tmp->maps[tmp->i], ' ');
+		if (tmp->j != -1)
+			flood_fill(tmp, tmp->i, tmp->j);
 		tmp->i++;
 	}
-	tmp->i--;
-	flood_fill(tmp, tmp->i, tmp->j);
 	return (tmp);
 }
 
@@ -66,18 +65,7 @@ void	check_map_and_cleanup(t_map *map, t_ft *tmp)
 	int	i;
 
 	i = 0;
-	wc_space(map, tmp->maps);
-	if (tmp->spaces != map->spaces)
-	{
-		printf("Error map_closed()\n");
-		exit(0);
-	}
 	check_walls(map);
-	while (tmp->maps[i])
-	{
-		printf("%s\n", tmp->maps[i]);
-		i++;
-	}
 	ft_free_tmp(tmp->maps);
 	free(tmp->maps);
 	free(tmp);

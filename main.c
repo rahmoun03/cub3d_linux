@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:22 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 17:15:59 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:22:51 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	main(int ac, char **av)
 	else
 	{
 		init_t_map(ptr);
-		printf("%svalid \n%s", GREEN, DEFFAULT);
 		read_file(ptr, fd);
 		start_mlx(game);
 	}

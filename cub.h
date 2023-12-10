@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 17:15:00 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:15:40 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_ft
 	int			j;
 	int			colum;
 	int			spaces;
+	char		player;
 	char		**maps;
 }				t_ft;
 
@@ -291,5 +292,6 @@ int				set_ofx(t_game *game, int x_pos, int y_pos);
 void			init_textures(t_game *game);
 int				check_color(t_game *game, int x_pos, int y_pos, t_wall wall);
 int				check_rays_2d(t_game *game, int pix, double x, double y);
+int				check_zero(char *str, int j);
 
 #endif

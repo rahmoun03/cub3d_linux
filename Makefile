@@ -6,7 +6,7 @@
 #    By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 12:53:19 by arahmoun          #+#    #+#              #
-#    Updated: 2023/12/09 18:03:51 by arahmoun         ###   ########.fr        #
+#    Updated: 2023/12/10 17:19:26 by arahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ SRCS = ${GNL} ${PSRC} ${RSRC} main.c
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
-MLX_LINUX = -lmlx -lXext -lX11 -lm -lmcheck #-lbsd -lXext -lX11 -lm
+MLX_LINUX = -lmlx -lXext -lX11 -lm -lmcheck
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror -Ofast
 
 CC = cc ${FLAGS}
 
