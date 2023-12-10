@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 21:21:27 by bel-kase          #+#    #+#             */
-/*   Updated: 2023/12/10 16:18:35 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/10 20:37:00 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void	check_side_walls(char **lines, int height, char *error_message)
 	while (i < height)
 	{
 		width = ft_len(lines[i]);
-		if ((lines[i][0] != '1' && lines[i][width - 1] != '1')
-				&& lines[i][0] != ' ' && lines[i][width - 1] != ' ')
+		if ((lines[i][0] != '1' && lines[i][0] != ' ')
+			|| (lines[i][width - 1] != '1'
+				&& lines[i][width - 1] != ' '))
 		{
 			printf("%s\n", error_message);
 			exit(1);
