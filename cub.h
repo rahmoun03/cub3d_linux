@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 12:53:29 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/10 16:15:40 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:30:29 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,10 @@ typedef struct s_game
 	int			walk_r_l;
 	float		xplayer;
 	float		yplayer;
+	int			new_mouse_x;
+	int			new_mouse_y;
+	int			old_mouse_x;
+	int			old_mouse_y;
 	int			x;
 	int			y;
 	double		rayangle;
@@ -293,5 +297,6 @@ void			init_textures(t_game *game);
 int				check_color(t_game *game, int x_pos, int y_pos, t_wall wall);
 int				check_rays_2d(t_game *game, int pix, double x, double y);
 int				check_zero(char *str, int j);
+void			check_rotation(t_game *game);
 
 #endif

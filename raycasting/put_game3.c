@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:07:41 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 14:02:23 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:20:06 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	enter_key(t_game *game)
 		game->condition = 0;
 	}
 	else if (game->welcome && game->start == -1 && !game->condition)
+	{
 		game->start = 0;
+		mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
+		mlx_mouse_hide(game->mlx, game->win);
+	}
 	else if (!game->welcome && game->start == -1)
 		exit(0);
 }
@@ -86,6 +90,8 @@ int	update(t_game *game)
 	}
 	else
 	{
+		mlx_mouse_get_pos(game->mlx, game->win,
+			&game->new_mouse_x, &game->new_mouse_y);
 		check_moves(game);
 		render_3d(game, game->t_map);
 		mini_map(game);

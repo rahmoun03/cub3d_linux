@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:56:20 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 16:57:26 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:31:14 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,32 @@ int	check_rays_2d(t_game *game, int pix, double x, double y)
 	else if (game->t_map->maps[(y_map) / 10][(x_map - 1) / 10] == '1')
 		return (0);
 	return (1);
+}
+
+void	check_rotation(t_game *game)
+{
+	if ((game->rotaion == 1)
+		|| (game->old_mouse_x < game->new_mouse_x
+			&& game->new_mouse_x <= WIDTH && game->new_mouse_x >= 0
+			&& game->new_mouse_y <= HEIGHT && game->new_mouse_y >= 0))
+	{
+		if (game->old_mouse_x < game->new_mouse_x)
+			game->rotatangle += (PI / 180)
+				* (game->new_mouse_x - game->old_mouse_x) / 2;
+		else
+			game->rotatangle += (PI / 180) * 4;
+		game->old_mouse_x = game->new_mouse_x;
+	}
+	else if ((game->rotaion == -1)
+		|| (game->old_mouse_x > game->new_mouse_x
+			&& game->new_mouse_x <= WIDTH && game->new_mouse_x >= 0
+			&& game->new_mouse_y <= HEIGHT && game->new_mouse_y >= 0))
+	{
+		if (game->old_mouse_x > game->new_mouse_x)
+			game->rotatangle -= (PI / 180)
+				* (game->old_mouse_x - game->new_mouse_x) / 2;
+		else
+			game->rotatangle -= (PI / 180) * 4;
+		game->old_mouse_x = game->new_mouse_x;
+	}
 }

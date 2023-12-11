@@ -6,7 +6,7 @@
 /*   By: arahmoun <arahmoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:00:28 by arahmoun          #+#    #+#             */
-/*   Updated: 2023/12/09 17:58:42 by arahmoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:30:52 by arahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void	check_moves(t_game *game)
 		ft_right(game);
 	else if (game->walk_r_l == -1)
 		ft_lift(game);
-	if (game->rotaion == 1)
-		game->rotatangle += (PI / 180) * 4;
-	else if (game->rotaion == -1)
-		game->rotatangle -= (PI / 180) * 4;
+	check_rotation(game);
 }
 
 unsigned int	get_pixel_img(t_imag img, int x, int y)
