@@ -1,7 +1,5 @@
 <center><h1>My first RayCaster with miniLibX</h1></center>
 
-# Ray Casting with C and Minilibx
-
 This project demonstrates ray casting using C programming language with the Minilibx library. Ray casting is a technique used in computer graphics for rendering 3D scenes by simulating the path of light rays.
 
 ## Overview
