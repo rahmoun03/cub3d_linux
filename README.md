@@ -1,1 +1,1 @@
-<center><p2>My first RayCaster with miniLibX</p2></center>
+<center><p1>My first RayCaster with miniLibX</p1></center>
