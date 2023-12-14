@@ -1,43 +1,30 @@
 <center><h1>My first RayCaster with miniLibX</h1></center>
 
-# Ray Casting
+# Ray Casting with C and Minilibx
 
-This project demonstrates ray casting, a technique widely used in computer graphics for rendering 3D scenes. Ray casting involves simulating the path of light rays to determine what objects or surfaces they intersect with in a scene.
+This project demonstrates ray casting using C programming language with the Minilibx library. Ray casting is a technique used in computer graphics for rendering 3D scenes by simulating the path of light rays.
 
 ## Overview
 
-The repository contains implementations of ray casting algorithms in various programming languages (if applicable). It includes basic demos and possibly more complex examples to illustrate the concept.
+This repository contains a ray casting implementation in C using the Minilibx library. It showcases basic demos and examples to illustrate the ray casting concept.
 
-## How it Works
+## Prerequisites
 
-Ray casting typically involves the following steps:
-- **Casting Rays**: Rays are cast from the observer's viewpoint (often referred to as the camera) into the scene.
-- **Intersection Testing**: Check if these rays intersect with any objects or surfaces in the scene.
-- **Calculating Intersection Points**: Determine the point(s) where the ray intersects an object's surface.
-- **Rendering**: Use the intersection information to render the scene, often by determining lighting, shadows, and object colors.
+Before running the project, ensure you have the following:
+- **C Compiler**: Install a C compiler such as GCC.
+- **Minilibx Library**: Install and configure the Minilibx library. (Provide installation instructions or link to resources for Minilibx setup if needed.)
 
 ## Usage
 
-Provide instructions on how to use and run the code:
-1. **Installation**: If there are specific installation or setup instructions, outline them here.
-2. **Running the Demos**: Provide commands or steps to run the included demos or examples.
-3. **Example Usage**: Offer a simple code snippet or instructions for users to integrate ray casting into their projects.
+To use this project:
+1. **Clone the Repository**: `git clone https://github.com/your-username/ray-casting.git`
+2. **Build the Project**: `cd ray-casting` and `make` (or any build command you use)
+3. **Run the Demos**: Execute the demo programs to see ray casting in action.
 
-## Contributing
+Example commands:
+```bash
+make            # Compile the project
+./demo1         # Run demo 1
+./demo2         # Run demo 2
+# Add specific instructions for running your demos or examples
 
-We welcome contributions! If you'd like to contribute to this project, please follow these steps:
-- Fork the repository.
-- Make your changes and test them thoroughly.
-- Submit a pull request detailing your changes.
-
-## Resources
-
-Include links or references to any relevant resources, such as articles, papers, or tutorials about ray casting.
-
-## License
-
-Indicate the project's license to inform users about permissions and restrictions.
-
-## Acknowledgments
-
-Optionally, acknowledge any contributors, libraries, or resources that have been particularly helpful in this project.
