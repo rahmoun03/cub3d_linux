@@ -11,6 +11,8 @@ This repository contains a ray casting implementation in C using the Minilibx li
 Before running the project, ensure you have the following:
 - **C Compiler**: Install a C compiler such as GCC.
 - **Minilibx Library**: Install and configure the Minilibx library. (Provide installation instructions or link to resources for Minilibx setup if needed.)
+- **header file** : # include "/nfs/homes/arahmoun/Downloads/minilibx-linux/mlx.h"  (path where your minilibx location)
+                    # include "/nfs/homes/arahmoun/Downloads/minilibx-linux/mlx_int.h" (path where your minilibx location)
 
 ## Usage
 
