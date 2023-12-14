@@ -6,6 +6,9 @@ This project demonstrates ray casting using C programming language with the Mini
 
 This repository contains a ray casting implementation in C using the Minilibx library. It showcases basic demos and examples to illustrate the ray casting concept.
 
+![Ray Casting Demo](https://upload.wikimedia.org/wikipedia/commons/e/e7/Simple_raycasting_with_fisheye_correction.gif)
+
+
 ## Prerequisites
 
 Before running the project, ensure you have the following:
